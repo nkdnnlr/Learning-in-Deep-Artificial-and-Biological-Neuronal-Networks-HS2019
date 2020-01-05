@@ -2,6 +2,7 @@
 
 
 \begin{document}
+\newpage
 \section{Introduction}
 
 \subsection{Motivation}
@@ -19,7 +20,7 @@ Deep-learning, a brain-inspired weak form of artificial intelligence, allows the
 
 \subsubsection{Applications}
 \paragraph{Driving Driverless Cars:} 
-Deep learning has become successful in solving tasks that were previously approached with rule based algortihms. The steering of a car is such an example. One can train a Convolutional Neural Network (CNN) to map raw pixels from a front-facing camera of a car directly to the steering commands\footnote{Bojarksi, End to End Learning for Self-Driving Cars, 2016}.
+Deep learning has become successful in solving tasks that were previously approached with rule based algortihms. The steering of a car is such an example. One can train a Convolutional Neural Network (CNN) to map raw pixels from a front-facing camera of a car directly to the steering commands\footnote{Bojarksi, "End to End Learning for Self-Driving Cars", 2016}.
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.6\linewidth]{01_Introduction/figures/driverless.png}
@@ -28,19 +29,19 @@ Deep learning has become successful in solving tasks that were previously approa
 \end{figure}
 
 \paragraph{Robotic Control:}
-More complex tasks, such as the actions of robotic limbs to mimic the dynamic and agile maneuvers of animals, can be approached by deep reinforcement learning\footnote{Hwangbo, Learning Agile and Dynamic Motor Skills for Legged Robots, 2019}. 
+More complex tasks, such as the actions of robotic limbs to mimic the dynamic and agile maneuvers of animals, can be approached by deep reinforcement learning\footnote{Hwangbo, "Learning Agile and Dynamic Motor Skills for Legged Robots", 2019}. 
 
 \paragraph{Text Generation:}
-Natural language processing tasks, such as question answering, machine translation, reading comprehension, and summarization, are typically approached with supervised learning on task-specific data sets. If enough data provided, they can also be approached with unsupervised deep learning \footnote{Radford, Language Models are Unsupervised Multitask Learners, 2019}.
+Natural language processing tasks, such as question answering, machine translation, reading comprehension, and summarization, are typically approached with supervised learning on task-specific data sets. If enough data provided, they can also be approached with unsupervised deep learning \footnote{Radford, "Language Models are Unsupervised Multitask Learners", 2019}.
 
 \paragraph{Speech Generation:}
-Speech synthesis, more specifically known as text-to-speech (TTS), is a comprehensive technology that involves many disciplines such as acoustics, linguistics, digital signal processing and statistics. The main task is to convert text input into speech output.  Recent advances on speech synthesis are overwhelmingly contributed by deep learning or even end-to-end techniques which have been utilized to enhance a wide range of application scenarios such as intelligent speech interaction, chatbot or conversational artificial intelligence. For speech synthesis, deep learning based techniques can leverage a large scale of <text, speech> pairs to learn effective feature representations to bridge the gap between text and speech, thus better characterizing the properties of events\footnote{Ning, A Review of Deep Learning Based Speech Synthesis, 2019}.
+Speech synthesis, more specifically known as text-to-speech (TTS), is a comprehensive technology that involves many disciplines such as acoustics, linguistics, digital signal processing and statistics. The main task is to convert text input into speech output.  Recent advances on speech synthesis are overwhelmingly contributed by deep learning or even end-to-end techniques which have been utilized to enhance a wide range of application scenarios such as intelligent speech interaction, chatbot or conversational artificial intelligence. For speech synthesis, deep learning based techniques can leverage a large scale of <text, speech> pairs to learn effective feature representations to bridge the gap between text and speech, thus better characterizing the properties of events\footnote{Ning, "A Review of Deep Learning Based Speech Synthesis", 2019}.
 
 \paragraph{Image Recognition and Med. Diagnostics:}
 Deep-learning models can be trained directly on medical data to deduce patterns and thus give precise diagnostics \footnote{Using AI to predict breast cancer and personalize care: \url{http://news.mit.edu/2019/using-ai-predict-breast-cancer-and-personalize-care-0507}}.
 
 \paragraph{Mastering Games:} 
-Recently, several games that where though to be too complicated for machines to play proficiently, have been mastered by algorithms based on deep learning. One such example is the game Go. AlphaGo, a program developed by Google DeepMind, defeated the world champion in Go. The tree search in AlphaGo evaluated positions and selected moves using deep neural networks. These neural networks were trained by supervised learning from human expert moves, and by reinforcement learning from self-play \footnote{Silver, Mastering the game of Go without human knowledge, 2017}.
+Recently, several games that where though to be too complicated for machines to play proficiently, have been mastered by algorithms based on deep learning. One such example is the game Go. AlphaGo, a program developed by Google DeepMind, defeated the world champion in Go. The tree search in AlphaGo evaluated positions and selected moves using deep neural networks. These neural networks were trained by supervised learning from human expert moves, and by reinforcement learning from self-play \footnote{Silver, "Mastering the game of Go without human knowledge", 2017}.
 
 \subsubsection{Challenges}
 
@@ -55,7 +56,7 @@ Shared learning on confidential data. Look at the brain: Most of the data we per
 \paragraph{Composable AI systems:}
 Combining multiple systems to solve complex tasks. Look at the brain: It is comprised of over 200 different brain areas that all learn differently. 
 \paragraph{Unsupervised learning:}
-Learning without the need of labels by creating useful data representations. Look at the brain: It uses a combination of supervised learning, unsupervised learning and reinforcement learning\footnote{Doya, Complementary roles of basal ganglia and cerebellum in learning and motor control, 2000}.
+Learning without the need of labels by creating useful data representations. Look at the brain: It uses a combination of supervised learning, unsupervised learning and reinforcement learning\footnote{Doya, "Complementary roles of basal ganglia and cerebellum in learning and motor control", 2000}.
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.5\linewidth]{01_Introduction/figures/basalandcerebellum.png}
@@ -72,7 +73,7 @@ Using only a few data examples to create generalizing representations. Look at t
 \paragraph{Universal Learning Machine (ULM):} A simple and yet very powerful and general model for intelligent agents\footnote{Cool blog post: \url{https://www.lesswrong.com/posts/9Yc7Pp7szcjPgPsjf/the-brain-as-a-universal-learning-machine}}. It is an extension of a general computer - such as Turing Machine - amplified with a universal learning algorithm. An initial untrained seed ULM can be defined by 1.) a prior over the space of models (or equivalently, programs), 2.) an initial utility function, and 3.) the universal learning machinery/algorithm.  The machine is a real-time system that processes an input sensory/observation stream and produces an output motor/action stream to control the external world using a learned internal program that is the result of continuous self-optimization. 
 
 
-\paragraph{Inheritance:} One criticism to typical artificial neural networks (ANNs) and supervised learning in general is, that everything is learned and nothing inherited. Contrarily, young animals (including humans) learn without seeing an enormous numbers of labeled examples. This could either lead to the belief, that animals must rely on unsupervised learning, or that most animal behavior is actually encoded in the genome. Specifically, animals are born with highly structured brain connectivity, which enables them to learn very rapidly. Because the wiring diagram is far too complex to be specified explicitly in the genome, it must be compressed through a “genomic bottleneck”. The genomic bottleneck suggests a path toward ANNs capable of rapid learning\footnote{Zador, A critique of pure learning and what artificial neural networks can learn from animal brains, 2019}. There are animals, such as the simple worm \textit{C. Elegans}, stores the entire neuronal wiring in its genome. Thus, the wiring pattern is identical for each worm. 
+\paragraph{Inheritance:} One criticism to typical artificial neural networks (ANNs) and supervised learning in general is, that everything is learned and nothing inherited. Contrarily, young animals (including humans) learn without seeing an enormous numbers of labeled examples. This could either lead to the belief, that animals must rely on unsupervised learning, or that most animal behavior is actually encoded in the genome. Specifically, animals are born with highly structured brain connectivity, which enables them to learn very rapidly. Because the wiring diagram is far too complex to be specified explicitly in the genome, it must be compressed through a “genomic bottleneck”. The genomic bottleneck suggests a path toward ANNs capable of rapid learning\footnote{Zador, "A critique of pure learning and what artificial neural networks can learn from animal brains", 2019}. There are animals, such as the simple worm \textit{C. Elegans}, stores the entire neuronal wiring in its genome. Thus, the wiring pattern is identical for each worm. 
 
 \paragraph{The human brain in numbers:} At 1232 grams, the human brain has about $10^{11}$ neurons, and more than 103 synapses per neuron. Specifying a connection target requires about $\log_2 10^{11}$ = 35 bits/synapse. Thus it would take about $3.5 * 10^{15}$ bits ($\approx 400$ TB) to specify all $10^{14}$ connections in the brain. One could therefore conclude, that the human brain is mostly learned.
 
@@ -190,6 +191,10 @@ How does information processing and learning in deep networks and biological net
 
 \paragraph{Functional Magnetic Resonance Imaging (fMRI)} indirectly measures brain activity by detecting changes associated with blood flow. This technique relies on the fact that cerebral blood flow and neuronal activation are coupled. When an area of the brain is in use, blood flow to that region also increases. The primary form of fMRI uses the blood-oxygen-level dependent (BOLD) contrast\footnote{\url{https://en.wikipedia.org/wiki/Functional_magnetic_resonance_imaging}}.
 
-
+\subsection{Questions}
+\begin{enumerate}
+    \item What is the duration of a spike?
+    \item How fast do APs propagate along the axon?
+\end{enumerate}
 
 \end{document}
