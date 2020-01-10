@@ -26,6 +26,14 @@
 \usepackage{cleveref}
 \usepackage{bm}
 \usepackage{blindtext}
+\usepackage{soul}
+\DeclareMathOperator{\EX}{\mathbb{E}}% expected value
+\DeclareMathOperator*{\argmax}{arg\,max} 
+\DeclareMathOperator*{\argmin}{arg\,min} 
+
+\usepackage{adjustbox}
+
+\newcommand{\myvec}[1]{\ensuremath{\begin{pmatrix}#1\end{pmatrix}}}
 
 
 \graphicspath{{./figures/}}
@@ -64,7 +72,6 @@ Nik Dennler (nik.dennler@uzh.ch)\\
 \subfile{12_NeuromorphicSystems2/NeuromorphicSystems2.tex}
 \subfile{13_LearningInRecurrentNeuronalNetworks/LearningInRecurrentNeuronalNetworks.tex}
 \subfile{14_ContinualMetaAndTransferLearning/ContinualMetaAndTransferLearning.tex}
-
 
 
 
