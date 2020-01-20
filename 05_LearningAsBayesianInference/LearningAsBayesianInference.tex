@@ -40,9 +40,9 @@ Till now, we have talked about the standard view of learning. In this view, the 
 \begin{enumerate}
     \item Define a global loss function, for instance a squared loss
         \begin{equation}
-            L(w) = \frac{1}{2} \sum_{n=1}^{N} \parallel t^{(n)} - f_{NN}(x^{(n)},w) \parallel
+            L(w) = \frac{1}{2} \sum_{n=1}^{N} \parallel t^{(n)} - f_{NN}(x^{(n)},w) \parallel^2
         \end{equation}
-    \item Systematically update the model parameters (i.e weights) to minimize L relying on the gradients of L. In DL, the common method is backprop.
+    \item Systematically update the model parameters (i.e weights) to minimize $L$ relying on the gradients of $L$. In DL, the common method is backprop.
     
         \begin{equation}
             \Delta w = -\eta \bigtriangledown_w L(w)
@@ -53,7 +53,7 @@ Till now, we have talked about the standard view of learning. In this view, the 
 
 \paragraph{Why does it work?}
 \hl{...}
-\paragraph{Credit assignment:} "The concept of credit assignment refers to the problem of determining how much ‘credit’ or ‘blame’ a given neuron or synapse should get for a given outcome." \footnote{Richards, Lillicrap, Therien* et al. A deep learning framework for neuroscience, 2019.}
+\paragraph{Credit assignment:} "The concept of credit assignment refers to the problem of determining how much ‘credit’ or ‘blame’ a given neuron or synapse should get for a given outcome."\footnote{Richards, Lillicrap, Therien* et al. A deep learning framework for neuroscience, 2019.}
 \noindent It can be formulated as an optimization problem. However, we must distinguish between pure (traditional) optimization and the optimization used for training of deep models.
 
 \subsubsection{How learning differs from pure optimization?}
@@ -132,8 +132,10 @@ Using the fact that the likelihood and the priors are both normal distributions 
 \end{equation}
 
 \noindent That is the value that maximizes the posterior $p(\bm{w}|D)$, also called \textbf{maximum a posteriori estimate} of the weights. 
-Using some analytical manipulations, we can show that
+Using some analytical manipulations, we can show that\footnote{Blundell et al., \textit{Weight Uncertainty in Neural Networks}, 2015}
+
 \begin{equation}
+    \bm{w}^\textrm{MAP} = \arg\max_{\bm{w}} \log P(\mathcal{D}\vert\bm{w}) + \log P(\bm{w})
     \hl{...}
 \end{equation}
 
@@ -204,7 +206,7 @@ The Kullback-Leibler divergence between two densities q and p is
 defined as
 
 \begin{equation}
-    D_{KL}(q(\bm{w})||p(\bm{w}) = \int_\Omega q(\bm{w}) . log \frac{q(\bm{w})}{p(\bm{w}} d\bm{w}
+    D_{KL}(q(\bm{w})||p(\bm{w}) = \int_\Omega q(\bm{w}) . \log \frac{q(\bm{w})}{p(\bm{w}} d\bm{w}
     \label{eq:KL}
 \end{equation}
 
@@ -233,7 +235,7 @@ Consider a simpler weight distribution $q(\bm{w})$ parametrized by $\theta$. The
     \label{eq:VI_def}
 \end{equation}
 
-Using the definition of $D_{KL}$ in eq.\ref{eq:VI_def} and considering that the posterior $p(\bm{w}|D) \propto p(\bm{w}). p(D|\bm{w})$, we can write: \hl{continue derivation from the exercise}
+Using the definition of $D_{KL}$ in eq. \ref{eq:VI_def} and considering that the posterior $p(\bm{w}|D) \propto p(\bm{w}). p(D|\bm{w})$, we can write: \hl{continue derivation from the exercise}
 \begin{equation}
     \begin{split}
         \theta_{opt} &= \argmin_\theta \int q(\bm{w};\theta) . log \frac{q(\bm{w};\theta)}{p(\bm{w}|D)} d\bm{w}\\
@@ -389,8 +391,12 @@ Note that it would be easier if we swap the derivative and the expectation.
 \end{enumerate}
 
 \subsection{Drawbacks and Weaknesses of BbB}
-\hl{Discuss}
-One obvious drawback is that it is computationally expensive..
+\textbf{Discuss}
+\begin{itemize}
+    \item BbB is computationally expensive
+    \item we assume independence (product) $\to$ may be a crucial stupid assumption
+    \item \hl{Bayes central limit theorem}
+\end{itemize}
 
 \subsection{BbB and Neuroscience}
 Now the question is how to interpret or think about BbB from a neuroscience perspective?
@@ -399,17 +405,16 @@ Now the question is how to interpret or think about BbB from a neuroscience pers
 
 \begin{center}
 % \begin{adjustbox}{width=\textwidth}
-    \begin{tabular}{|p{5cm}|p{7cm}|}
-    \hline
-     Bayes by Backprop Algorithm & How to think about it in the brain?\\\\
-     \hline
-     \hline
-    Independent weight sampling &  Noisy synaptic transmission. Every time the an input is propagated, the mean weight $\mu$ is corrupted by additive Gaussian noise.\\
-    \hline\\
-    Learning changes both the mean synaptic weight $\mu$ and the level of synaptic variability $\sigma^2$ & Can it be considered as “higher order” form of synaptic plasticity?  \\ 
-    \hline\\
-    Independent synapses assumption in q(w) &  Extra terms in the learning rules are local to synapses \\ 
-    \hline
+    \begin{tabular}{p{5cm}p{7cm}}
+    \toprule
+    \textbf{BbB Algorithm} & \textbf{How to think about it in the brain?}
+    \\\toprule
+    Independent weight sampling &  Noisy synaptic transmission. Every time an input is propagated, the mean weight $\mu$ is corrupted by additive Gaussian noise.
+    \\\midrule
+    Learning changes both the mean synaptic weight $\mu$ and the level of synaptic variability $\sigma^2$ & Can it be considered as “higher order” form of synaptic plasticity?
+    \\\midrule
+    Independent synapses assumption in q(w) &  Extra terms in the learning rules are local to synapses
+    \\\bottomrule
     \end{tabular}
 % \end{adjustbox}
 \end{center}
@@ -420,7 +425,7 @@ Some key facts to note \footnote{Llera1, Sacramento and Costa. Computational rol
     \item Synaptic transmission is inherently stochastic, meaning that a pre-synaptic action potential may and may not trigger neurotransmitter release.
     \item There is evidence that plasticity changes the properties (modifies the mean and variance of 
     synaptic response) and number of postsynaptic receptors, as well as the presynaptic "machinery" responsible for stochastic neurotransmitter release.
-    \item Probabilistic nature of synaptic transmission has been describes as a binomial process process parametrised by
+    \item Probabilistic nature of synaptic transmission has been describes as a binomial process parametrised by
         \begin{enumerate}
             \item Number of synaptic release sites N
             \item Presynaptic release probability $P_{rel}$

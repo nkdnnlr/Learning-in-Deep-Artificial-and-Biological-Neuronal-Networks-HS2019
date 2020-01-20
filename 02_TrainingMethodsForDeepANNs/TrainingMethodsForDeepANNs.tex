@@ -143,8 +143,28 @@ where $\bm{\beta}^l$ is a random matrix with fixed weights (does not get updated
 	\label{fig:feedbackalignment}
 \end{figure}
 
-\subsubsection{Why does it work?}
-Some mathematical reasoning and the convergence proof is shown in the original paper and stated again in a follow-up paper. Intuitively; for FA the feedback weights are fixed, but if the forward weights are adapted, they will approximately align with the pseudo-inverse of the feedback weights in order to make the feedback useful. In some sense, the network learns how to learn, which is pretty dope. 
+\subsubsection{Why does FA work?}
+Some mathematical reasoning and the convergence proof is shown in the original paper and stated again in a follow-up paper. Intuitively; for FA the feedback weights are fixed, but if the forward weights are adapted, they will approximately align with the pseudo-inverse of the feedback weights in order to make the feedback useful. In some sense, the network learns how to learn, which is pretty dope.
+
+\iffalse
+\begin{minipage}{.6\textwidth}
+    \textit{Edit}:\\$B$ and $W$ communicate indirectly: (refer to fig. \ref{fig:why_fa_works}a)
+    
+    \begin{itemize}
+        \item weight information from $B$ flows back into $W_0$ \textcolor{gray}{ (due to $\Delta W_0 \propto B \,\bold{e}\, \bold{x}^\top$ ) }
+        \item information gets forwarded to $W$ $\color{gray}{ \textsf{(due to } \Delta W = \bold{e}\bold{h}^\top = \bold{e}\bold{x}^\top W_0^\top \textsf{)} }$
+        \item $W$ aligns with $B^\top$; $B$ begins to act like $W^\top$, sending useful teaching signals to the hidden units
+    \end{itemize}
+\end{minipage}%
+\begin{minipage}{.4\textwidth}
+    \begin{figure}[H]
+        \raggedleft
+        \includegraphics[width=.8\textwidth]{02_TrainingMethodsForDeepANNs/figures/why_FA_works.jpg}
+        \caption{Why FA works}
+        \label{fig:why_fa_works}
+    \end{figure}
+\end{minipage}
+\fi
 
 \subsubsection{Variations of Feedback Alignment}
 There are variations of feedback alignment, which show to be useful especially for deeper network architectures. The figure below shows Feedback Alignment (FA), Direct Feedback Alignment (DFA) and Indirect Feedback alignment\footnote{Nøkland, "Direct Feedback Alignment Provides Learning in Deep Neural Networks", 2016} (IFA).  In \cref{fig:bidirect_feedbackalignment} we see the Bi-directional Feedback Alignment\footnote{Luo, "Adaptive Bidirectional Backpropagation: Towards Biologically Plausible Error Signal Transmission in Neural Networks", 2017} (BFA).
