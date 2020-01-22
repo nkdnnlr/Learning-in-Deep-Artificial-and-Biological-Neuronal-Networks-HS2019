@@ -60,7 +60,7 @@ When looking at individual neuronal cells structurally we can define a set of co
 
 Detailed biophysical models of cortical circuits are derived from neuroscience experiments. Neural networks models are designed, with realistic spiking neurons and dynamic synapses, then mapped into analog circuits and integrated in large numbers on VLSI chips. [cite: computational intelligence book] 
 
-One example of analog integrated circuit with the functional characteristics of real nerve cells can be seen in Figure \ref{fig:hh}. Because the physics underlying the conductivity of silicon devices and biological membranes is similar, the 'silicon neuron' is able to emulate efficiently the ion currents that cause nerve impulses and control the dynamics of their discharge. It operates in real-time and consumes little power, and many 'neurons' can be fabricated on a single silicon chip.  [cite: a silicon neuron] This neuron implements the Hodkin-Hauxley model which expresses the membrane conductance effects of $Na^+$ and $K^+$ ion currents and of the passive leak at rest and during an action potential. The variable conductance is implemented using the \textit{follower-integrator} circuit. The follower-integrator is composed of a transconductance amplifier configured in negative feedback mode with its output node connected to a capacitor. In weak-inversion the circuit behaves as a first-order low-pass filter with a tunable conductance. [cite neuromorphic silicon neurons].
+One example of analog integrated circuit with the functional characteristics of real nerve cells can be seen in Figure \ref{fig:hh}. Because the physics underlying the conductivity of silicon devices and biological membranes is similar, the 'silicon neuron' is able to emulate efficiently the ion currents that cause nerve impulses and control the dynamics of their discharge. It operates in real-time and consumes little power, and many 'neurons' can be fabricated on a single silicon chip.  [cite: a silicon neuron] This neuron implements the Hodgkin-Huxley model which expresses the membrane conductance effects of $Na^+$ and $K^+$ ion currents and of the passive leak at rest and during an action potential. The variable conductance is implemented using the \textit{follower-integrator} circuit. The follower-integrator is composed of a transconductance amplifier configured in negative feedback mode with its output node connected to a capacitor. In weak-inversion the circuit behaves as a first-order low-pass filter with a tunable conductance. [cite neuromorphic silicon neurons].
 %
 \begin{figure}[h]
     \centering
@@ -88,7 +88,7 @@ The log-domain photoreceptor is the correspondent of the cone cell, the
 \subsection{Sensors driving event-driven Deep Learning networks}
 \subsubsection{Background of deep networks and biological aspirations}
 \subsubsection{Spiking neurons + deep network systems}
-\subsubsection{Data-driven deep networs}
+\subsubsection{Data-driven deep networks}
 \subsubsection{Conversion of deep ANN to deep SNN}
 
 \end{document}

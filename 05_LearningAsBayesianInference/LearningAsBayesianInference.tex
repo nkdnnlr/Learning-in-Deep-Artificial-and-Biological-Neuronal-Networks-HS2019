@@ -136,9 +136,8 @@ Using some analytical manipulations, we can show that\footnote{Blundell et al., 
 
 \begin{equation}
     \bm{w}^\textrm{MAP} = \arg\max_{\bm{w}} \log P(\mathcal{D}\vert\bm{w}) + \log P(\bm{w})
-    \hl{...}
 \end{equation}
-
+    \hl{...}
 \noindent However, as we will see later, using the mode of the posterior doesn't help much. In fact, summarizing the posterior with a single point estimate again leads to the same problem we are trying to avoid, which is a single "best" value for the weights, i.e a single line separating the data (in the context of stochastic binary classification). 
 \begin{figure}[H]
     	\centering
@@ -200,10 +199,9 @@ Another way of phrasing the question: \textbf{why not use the "plug-in" solution
     	\caption{$q(\bm{w})$ is a surrogate distribution \textit{similar} to $p(\bm{w}|D)$}
     	\label{fig:q_posterior}
     \end{figure}
-\paragraph{Interim: Kullback-Leibler (KL) Divergence}\\
+\paragraph{Interim: Kullback-Leibler (KL) Divergence:}
 
-The Kullback-Leibler divergence between two densities q and p is
-defined as
+The Kullback-Leibler divergence between two densities q and p is defined as
 
 \begin{equation}
     D_{KL}(q(\bm{w})||p(\bm{w}) = \int_\Omega q(\bm{w}) . \log \frac{q(\bm{w})}{p(\bm{w}} d\bm{w}
@@ -425,7 +423,7 @@ Some key facts to note \footnote{Llera1, Sacramento and Costa. Computational rol
     \item Synaptic transmission is inherently stochastic, meaning that a pre-synaptic action potential may and may not trigger neurotransmitter release.
     \item There is evidence that plasticity changes the properties (modifies the mean and variance of 
     synaptic response) and number of postsynaptic receptors, as well as the presynaptic "machinery" responsible for stochastic neurotransmitter release.
-    \item Probabilistic nature of synaptic transmission has been describes as a binomial process parametrised by
+    \item Probabilistic nature of synaptic transmission has been described as a binomial process parametrised by
         \begin{enumerate}
             \item Number of synaptic release sites N
             \item Presynaptic release probability $P_{rel}$
@@ -454,7 +452,7 @@ Some key facts to note \footnote{Llera1, Sacramento and Costa. Computational rol
      \begin{figure}[H]
     	\centering
     	\includegraphics[width=0.9\linewidth]{05_LearningAsBayesianInference/figures/longterm_plasticity.png}
-    	\caption{Long-term plasticity of probabilistic synapses. (i) Different induction protocols have been shown to trigger changes in the probability of postsynaptic responses. Schematic on the left represents pre- and postsynaptic spikes in a spike- timing-dependent plasticity protocol, which depending on the timing between pre- and postsynaptic spikes (∆t) as well as the inter-spike interval (ISI) may lead to long-term potentiation (LTP) or depression (LTD). This in turn changes not only the mean synaptic response, but also its variance. (ii) Modifications to probabilistic synapses during plasticity are known to rely on specific retrograde (e.g. endocannabinoids (eCB) and nitric oxide (NO)) and anterograde signals (glutamate (Glu)). (iii) Behavioural outcomes (e.g. reward) may rely on neuromodulation (e.g. Dopamine) to regulate plasticity at probabilistic synapses. (extracted from Llera,2019)} 
+    	\caption{Long-term plasticity of probabilistic synapses. (i) Different induction protocols have been shown to trigger changes in the probability of postsynaptic responses. Schematic on the left represents pre- and postsynaptic spikes in a spike- timing-dependent plasticity protocol, which depending on the timing between pre- and postsynaptic spikes ($\delta t$) as well as the inter-spike interval (ISI) may lead to long-term potentiation (LTP) or depression (LTD). This in turn changes not only the mean synaptic response, but also its variance. (ii) Modifications to probabilistic synapses during plasticity are known to rely on specific retrograde (e.g. endocannabinoids (eCB) and nitric oxide (NO)) and anterograde signals (glutamate (Glu)). (iii) Behavioural outcomes (e.g. reward) may rely on neuromodulation (e.g. Dopamine) to regulate plasticity at probabilistic synapses. (extracted from Llera,2019)} 
     	\label{fig:synaptic_tx}
     \end{figure}
 \end{itemize}

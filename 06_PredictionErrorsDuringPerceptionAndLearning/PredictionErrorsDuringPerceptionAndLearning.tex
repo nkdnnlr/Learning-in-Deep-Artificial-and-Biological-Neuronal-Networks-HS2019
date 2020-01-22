@@ -7,7 +7,7 @@
 \subsection{Motivation}
 There are many theories and principles about the brain such as free-energy principle, predictive coding theory and theories about error back-propagation in the brain. These different approaches attempt to explain the structure and function of the brain from a probabilistic inference perspective focusing on error propagation. 
 
-In this chapter, we, as well, consider prediction and perceptual categorization as an inference problem that is solved by the brain\footnote{Friston $&$ Kiebal. Predictive coding under the free-energy principle. \textit{Philosophical Transactions of The Royal Society B Biological Sciences}· June 2009.}. Under our view, in this chapter, the brain models the world as a hierarchy of dynamic systems. One key difference between this view and what we have learnt in the previous chapter on variational inference lies in the distinction between discriminative and generative models\footnote{https://www.cs.toronto.edu/~duvenaud/courses/csc2541/index.html}.
+In this chapter, we, as well, consider prediction and perceptual categorization as an inference problem that is solved by the brain\footnote{Friston \& Kiebal. Predictive coding under the free-energy principle. \textit{Philosophical Transactions of The Royal Society B Biological Sciences}· June 2009.}. Under our view, in this chapter, the brain models the world as a hierarchy of dynamic systems. One key difference between this view and what we have learnt in the previous chapter on variational inference lies in the distinction between discriminative and generative models\footnote{https://www.cs.toronto.edu/~duvenaud/courses/csc2541/index.html}.
 
 
 \subsubsection{Discriminative Vs Generative Models}
@@ -137,7 +137,7 @@ In such context and following the same approach from Chapter 5, we perform infer
                         &= \{ \mu_N, \Sigma_N\} 
             \end{split}
         \end{equation}
-    \item \textbf{Note}: we will include the bias vector as an additional weight column and set all covariance matrices $\Simga_i$ to identity matrix $I$:
+    \item \textbf{Note}: we will include the bias vector as an additional weight column and set all covariance matrices $\Sigma_i$ to identity matrix $I$:
         \begin{equation}
             I= diag(1,1 \dots , 1)
         \end{equation}
@@ -169,8 +169,7 @@ As we use MAP criterion to find an optimal $\bm{h}$, inference has again boiled 
 \begin{equation}
     \begin{split}
         \bm{h}^* &= \argmax_h p(\bm{h}|\bm{x};\Theta)\\
-        &= \argmax_h p(\bm{x},\bm{h})\\
-
+        &= \argmax_h p(\bm{x},\bm{h})
     \end{split}
 \end{equation}
 Given our model assumptions listed previously and  eq.\ref{eq:joint_density}, it would be easier to deal with the log of the density. We can then revisit our optimization problem, and turn it into minimization for use of the efficiency of gradient descent: 
@@ -195,7 +194,7 @@ Next, let us plug the definition of our model, compute derivatives by hand (this
 
 \hl{insert equation for gradient descent for layer N, 0, and any middle layer i. I think the exact derivation of these equations are not important, it's just the idea of solving MAP estimation using gd that matters}
 \begin{equation}
-
+adds
 \label{eq:gd_latent}
 \end{equation}
 
@@ -248,7 +247,7 @@ Solving the system eq.\ref{eq:gd_latent} for optimality, i.e setting the derivat
    &\bm{e_i^*} = \phi (\bm{h_i}) \; \bm{W_{i-1}}^T \; \bm{e_{i-1}}^*
 \end{split}
 \end{equation}
-where $0\gt< i < N$\\ 
+where $0 < i < N$\\ 
 
 
 \fbox{%
@@ -261,7 +260,115 @@ We can immediately see the similarity with backpropagation. However note that he
     \item \textbf{We are using error propagation when computing predictions}! \hl{to clarify!}
 \end{itemize}}}
 
-\subsubsection{Unsupervosed Learning}
-To make inference in the previous section, we assumed the parameters $\Theta$ to be fixed. However, in fact, we would like to let our data specify them, i.e learn them from the data D. In this context, since we have no targets, this is an unsupervised learning problem.
+\subsubsection{Unsupervised Learning}
+To make inference, in the previous section, we assumed the parameters $\Theta$ to be fixed. However, in fact, we would like to let our data specify them, i.e learn them from the data D. In this context, since we have no targets, this is an unsupervised learning problem.
+
+A way of doing so in a probabilistic model is via maximum likelihood. Assume we have a set of $N_d$ inputs $\bm{x}$, that are independent. We can then write the likelihood function as th product of individual likelihood. 
+
+\begin{equation}
+    \argmax_\Theta p(D; \Theta) = \argmax_\Theta \; \Pi_{d=1}^{N_D} \; \; p(\bm{x_d}; \Theta)
+\end{equation}
+
+Note that the individual likelihood $p(\bm{x_d}; \Theta)$ can be computed by marginalizing the joint density of $\bm{x}$ and the latent variables $\bm{h}$, i.e:
+\begin{equation}
+    p(\bm{x_d}; \Theta) = \int_{H} p(\bm{x_d}, \bm{h}) d\bm{h} 
+\end{equation}
+
+\noindent However, remember that the joint density is is general not Gaussian, which would make the integral evaluation hard.
+
+\paragraph{Approximate algorithm to get the parameters $\Theta$}
+A surprisingly simple approximate algorithm exists for the HGM:
+
+Iterate over many given x:
+\begin{enumerate}
+    \item \underline{Relax the network} to a fixed point:
+        \begin{equation}
+            \bm{h_i}^* = \bm{W_i} \; \phi(\bm{h_{i+1}^*}) + \phi^\prime (\bm{h_i}^*) \; \bm{W_{i-1}}^T \; \bm{e_{i-1}}
+        \end{equation}
+        
+    \item Update the weights using \textbf{the outer product} between errors and predictions ("Hebbian with the error")
+        \begin{equation}
+            \Delta \bm{W_{i}} = \eta  \; \bm{e_i}^* \; \phi(\bm{h_{i+1}}^*)^T
+        \end{equation}
+\end{enumerate}
+
+The algorithm can be derived in the framework of variational inference.This view is useful as it allows obtaining more refined versions (e.g., Rezende et al., 2014)
+
+\subsubsection{Interim summary}
+Stepping back again to see what we have done so far. 
+\begin{figure}[H]
+        \centering
+        \includegraphics[width=0.9\linewidth]{06_PredictionErrorsDuringPerceptionAndLearning/figures/big_picture.png}
+        \label{fig:big_picture}
+\end{figure}
+
+\paragraph{Discussion point:}Does this way of doing unsupervised learning remind you of another neural network architecture? Yes, autoencoders. Conceptually, auto-encoder is close to a probabilistic model of the data.
+
+\begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\linewidth]{06_PredictionErrorsDuringPerceptionAndLearning/figures/autoencoder.png}
+        \label{fig:autoencoder}
+\end{figure}
+
+\begin{itemize}
+    \item We assumed data are generated through a \textbf{deep nonlinear Gaussian model} (a hierarchical gaussain model) $p(\bm{x}, \bm{h})$ with N layers of latent variables $\bm{h}$.
+    
+    \item We have seen how \textbf{perception is a probabilistic inference}, where making inference in this context is equivalent to finding $p(\bm{h}|\bm{x})$ (i.e inverting the model).
+
+    \item We simplified inference by summarizing the full posterior $p(\bm{x}, \bm{h})$ by its mode \textbf{(maximum a posteriori inference}).
+    
+    \item We obtained a \textbf{recurrent neural network model} with a special architecture that does the job (inference of h) for us.
+    
+    \item Learning \textbf{(inference of W)} can be done also within the recurrent network using two quantities: \textbf{predictions} and \textbf{prediction errors}.
+    
+\end{itemize}
 \subsection{Dynamics for error propagation}
+
+It’s nice that we have a continuous-time neural dynamics that yields both predictions and errors at steady state. But can we get something like that for our regression and classification deep learning models?\\
+
+\noindent Our goal here is to use the same model to implement regression and classification. In order to recover our classical view for backpropagation, we need to modify the way we do inference and learning.
+\begin{figure}[H]
+        \centering
+        \includegraphics[width=0.4\linewidth]{06_PredictionErrorsDuringPerceptionAndLearning/figures/HGM_backprop.png}
+        \label{fig:autoencoder}
+\end{figure}
+
+
+\paragraph{During inference}
+\begin{equation*}
+    \begin{split}
+        & \tau \frac{d}{dt} \bm{h_N} = - \bm{h_N} \; + \; \bm{W_N}\; \phi(\bm{h_{N-1}})\\
+        & \tau \frac{d}{dt} \bm{h_i} = - \bm{h_i} \; + \; \bm{W_i}\; \phi(\bm{h_{i-1}}) + \; \phi^\prime (\bm{h_{i}}) \; \bm{W_{i+1}}^T \;  (\bm{h_{i+1} - \bm{W_{i+1}} \; \phi(\bm{h_{i}})})
+    \end{split}
+\end{equation*}
+\paragraph{During learning:} set the top most layer of latent variables to the target outputs
+\begin{equation}
+    \bm{h_N} = t
+\end{equation}
+\begin{itemize}
+    \item Now errors propagate backward.
+    \item During inference, errors always vanish, so we recover a functionally
+\textbf{feedforward network} (no error terms involved).
+    \item The model is only “truly recurrent” during learning, when we fix the output layer.
+    \item In the limit of $\Sigma_N \rightarrow \infty$  we recover \textbf{exactly} backprop!
+\end{itemize}
+
+
+\subsubsection{How might the brain implement this neural network?}
+\begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\linewidth]{06_PredictionErrorsDuringPerceptionAndLearning/figures/network_equation_brain.png}
+        \label{fig:autoencoder}
+\end{figure}
+
+How do we wire up this network? Is there a single best way to do so? There are few concers that we have to address:
+\begin{itemize}
+    \item Lots of tied weights (recall the weight transport problem)
+    \item What is $\phi$? Maybe it transforms “voltage” (internal quantity) to neuron firing rate (spikes/second, transmitted to other cells)?
+    \item But then what are the $\bm{h_i}$? Are they the firing rate, or the “voltage”?
+\end{itemize}
+
+\subsubsection{Classical "predictive coding"model}
+
+
 \end{document}
