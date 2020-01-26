@@ -14,13 +14,13 @@ Goeffrey Hinton (backprop\footnote{Learning representations by back-propagating 
 \begin{enumerate}
     \item \textbf{Does not need labelled data.} In practice we often assume a fixed number of labels and call them cluster centers.
     \item \textbf {Is able to learn reveal the intricate structure (features) and can be used for dimensionality reduction.} This means we try to find projections in this this lower dimension space.
-    \item is able to generate new data examples that are consistent with the statistics of the training data.
-    \item \textbf {can predict future data examples (e.g. video frame prediction).} If we know the data representation we can try to find an inverse function out of our lower dimensional space. Which means we can sometimes reconstruct high dimensional data.
-    \item \textbf {can be used to detect familiar or out-of-distribution examples.} If we freeze our clusters, and then switch to another data set, then we can calculate the new data distance to the original data cluster centers.
-    \item can facilitate future supervised learning.
-    \item can be used to cluster the data.
-    \item \textbf{can be used to de-noise data.} We loose some information when projecting to a lower dimensional space. We optimize our method to retain the most useful information, this process might also de-noise our data.
-    \item can be used to encode data in a particular way (e.g. for data compression).
+    \item Is able to generate new data examples that are consistent with the statistics of the training data.
+    \item \textbf {Can predict future data examples (e.g. video frame prediction).} If we know the data representation we can try to find an inverse function out of our lower dimensional space. Which means we can sometimes reconstruct high dimensional data.
+    \item \textbf {Can be used to detect familiar or out-of-distribution examples.} If we freeze our clusters, and then switch to another data set, then we can calculate the new data distance to the original data cluster centers.
+    \item Can facilitate future supervised learning.
+    \item Can be used to cluster the data.
+    \item \textbf{Can be used to de-noise data.} We loose some information when projecting to a lower dimensional space. We optimize our method to retain the most useful information, this process might also de-noise our data.
+    \item Can be used to encode data in a particular way (e.g. for data compression).
     \item We assume that humans have learned the world in an almost unsupervised way. 
 \end{enumerate}
 
@@ -34,7 +34,7 @@ Goeffrey Hinton (backprop\footnote{Learning representations by back-propagating 
 \subsubsection{Unsupervised Learning in the Brain}
 We are aware of the fact that the brain as well uses unsupervised learning. Several examples were collected for the lecture.
 
-In 1970 an experiment was conducted on cats. The kittens were housed from birth in a completely dark room, but form the age of 2 weeks they were put in a special apparatus for an average of about 5 hours a day. The kitten stood on a clear glass platform inside a tall cylinder of which the entire surface was covered in black and white stripes (in different experiments they used horizontal and vertical stripes). Those poor cats then were virtually blind for contours perpendicular to the orientation they had experienced. They recorded single neurons from primary visual cortex and found that almost all cats had their neurons trained to be most selective in direction of the stripes presented in the experiment. Example distribution in Figure \ref{fig:orientation-neurons}. \textbf{Interpretation: The neurons are the cluster centers and they move around during learning (growing up). When presented one stimulus only, then all cluster centers group in the same optimum.}
+In 1970 an experiment was conducted on cats. The kittens were housed from birth in a completely dark room, but form the age of 2 weeks they were put in a special apparatus for an average of about 5 hours a day. The kitten stood on a clear glass platform inside a tall cylinder of which the entire surface was covered in black and white stripes (in different experiments they used horizontal and vertical stripes). Those poor cats then were virtually blind for contours perpendicular to the orientation they had experienced. They recorded single neurons from primary visual cortex and found that almost all cats had their neurons trained to be most selective in direction of the stripes presented in the experiment. Example distribution in Figure \cref{fig:orientation-neurons}. \textbf{Interpretation: The neurons are the cluster centers and they move around during learning (growing up). When presented one stimulus only, then all cluster centers group in the same optimum.}
 
 \begin{figure}[H]
 	\centering
@@ -304,7 +304,7 @@ It adds a term in the loss function to penalize the representation being too sen
 
 where $h_j$ is one unit output in the compressed code $\mathbf{z} = f(x)$.
 
-This penalty term is the sum of squares of all partial derivatives of the learned encoding with respect to input dimensions. The authors claimed that empirically this penalty was found to carve a representation that corresponds to a lower-dimensional non-linear manifold, while staying more invariant to majority directions orthogonal to the manifold.\footnote{https://lilianweng.github.io/lil-log/2018/08/12/from-autoencoder-to-beta-vae.html#sparse-autoencoder}
+This penalty term is the sum of squares of all partial derivatives of the learned encoding with respect to input dimensions. The authors claimed that empirically this penalty was found to carve a representation that corresponds to a lower-dimensional non-linear manifold, while staying more invariant to majority directions orthogonal to the manifold.\footnote{\url{https://lilianweng.github.io/lil-log/2018/08/12/from-autoencoder-to-beta-vae.html#sparse-autoencoder}}
 \subsection{Competitive Learning}
 Competitive learning is a form of unsupervised learning in artificial neural networks, in which nodes compete for the right to respond to a subset of the input data. A variant of Hebbian learning, competitive learning works by increasing the specialization of each node in the network. It is well suited to finding clusters within data. Imagine that we move our neuron around that space by adjusting the weights.
 
@@ -454,7 +454,8 @@ Training algorithm:
 \end{figure}
 
 \subsection{Helmholtz Machines}
-Motivating words from Prof. Grewe: "Never really worked".
+\epigraph{"Never really worked"}{Prof. Grewe}
+
 A Helmholtz machine contains two networks, a bottom-up recognition network that takes the data as input and produces a distribution over hidden variables, and a top-down "generative" network that generates values of the hidden variables and the data itself.
 
 Helmholtz machines were created to improve noise resilience, which is always present in natural data, and in hope that by learning economical representations of the data, the underlying structure of the generative model should reasonably approximate the hidden structure of the data set. 

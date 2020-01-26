@@ -79,33 +79,117 @@ In synaptic plasticity one understands changes in reactivity of \textbf{post}- t
 
 
 \subsubsection{Homeostatic Plasticity}
-The cells want to keep a steady firing rate so it turns the excitability of the synapses. This is called Synaptic scaling is the global activity the cell wants to keep, either increasing/decreasing the average activity level. It is not synaptic specific. 
+\textit{Info in this section is extracted from the paper by Turrigiano \footnote{Turrigiano. Homeostatic Synaptic Plasticity: Local and Global Mechanisms for Stabilizing Neuronal Function. 2012.}.}\\
 
-Example: isolated neurons are given inhibitors or excitatory chemical. Then washed the chemical effects off and the neuronal activity will spike in the inhibitory neurons and decrease in the artificially excited neurons. 
+\noindent
+Homeostatic plasticity is necessary to regulate neural circuits; to prevent them from becoming hyper- or hypo-active. In other words, homeostatic plasticity tries to break the positive feedback loop and make the neural circuit more stable. \\
 
-When information is propagated through a heircal network you want a certain amount of information expressed at each layer this prevent loss or explosion of information. This is similar to what occurs in deep networks, batch normalisation and weight decay, you want a certain activativation so that there is not uniform de/activation in the layers 
+\noindent But then, the question is \textbf{why would plasticity alone destabilize the activity of neural circuits?}
+\begin{itemize}
+    \item Although the synaptic-specific correlation-based mechanisms such as LTP and LTD contribute to learning and memory, they generate a powerful \textbf{destabilizing force} on network function. 
+    \item This is because when synapses undergo LTP they are better able to depolarize the postsynaptic neurons, which will increase the probability that they will undergo further LTP—leading to \textbf{unconstrained synaptic strengthening}
+    \item As correlated activity drives strengthening of specific synapses, and the post-synaptic neuron is driven more strongly, synapses that initially were only poorly correlated with postsynaptic firing will be better able to fire the postsynaptic neuron, so they too can be- come strengthened. Hence, the specificity breaks down.
+\end{itemize}
+For the above mentioned reasons, we therefore need forces to prevent further excitability and constraint the neural activity. To be considered truly homeostatic, a plasticity mechanism should regulate a key parameter (such as \textbf{average neuronal firing rate}) around some set-point value (See. fig.\ref{fig:firing_rate_regulation})
+
+\paragraph{Example illustrating the importance of regulating the overall activity:}\footnote{Turrigiano and Nelson. Homeostatic Plasticity in the developing nervous system. \textit{Nature Reviews Neuroscience}.2004} One way to illustrate this is to consider the problem of propagating patterned activity from the sensory periphery to higher-order neurons deep within the brain. We can draw this as a feedforward hierarchical network as in fig. \cref{fig:feedforwardnet_instability} where the activity in each layer (for example, photorecep- tors, bipolar cells, ganglion cells, lateral geniculate neurons, primary visual cortical neurons, and so on) is driven by activity in the preceding layer. We can see that in this simplified topology, the gain of transmission from one layer to the next must be close to unity for propagation to occur, otherwise the signal either dies out or specificity is lost. This is because more neurons will be recruited at successive stages, and at the highest levels all neurons will fire regardless of the pattern of firing at the input layer.\\
+
+\noindent
+When information is propagated through a hierarchical network you want a certain amount of information expressed at each layer this prevent loss or explosion of information. This is similar to what occurs in deep networks, batch normalisation and weight decay, you want a certain activation so that there is not uniform de/activation in the layers.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.9\textwidth]{03_PlasticityInTheBrain/figures/pasted_image_5.png}
+    \caption{The problem of stability in feedforward networks. a) Schematic feedforward network consisting of five layers of neurons. b,c) Expected firing rates of the red neuron in each layer in response to a sinusoidal input. If each action potential in a preceding layer causes more than one action potential in neurons at the next layer (b), the firing rates saturate and eventually all information about the stimulus is lost. If each action potential causes less than one action potential in neurons at the next layer (c), the signals eventually fail to propagate.}
+    \label{fig:feedforwardnet_instability}
+\end{figure}
+
+\paragraph{Regulating the activity of a neuron around a set point:} There are many phenomema that contribute to stabilization of neuronal activity. An example is pre- and postsynaptic forms of excitatory synaptic plasticity, such as \textbf{synaptic scaling}, that adjust all of a neuron’s excitatory synapses up or down in the right direction to stabilize firing rate. Note that this scaling happens to all the synapses by the same "multiplicative" factor; therefore the relative synpatic stregth is preserved. 
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=.7\textwidth]{03_PlasticityInTheBrain/figures/pasted_image_4.png}
-    \caption{Pre- and post-synaptic neuron}
-    \label{fig:syn_plas1t}
+    \caption{Homeostasis of neuronal firing through homeostatic synaptic plasticity. (A) Cartoon illustration of the phenomenon of firing rate homeostasis in dissociated neocortical networks; perturbing firing in either direction results in the homeostatic regulation of synaptic and intrinsic properties so that baseline firing rates are restored. (B) One mechanism contributing to the firing rate homeostasis illustrated in A is synaptic scaling. When activity is perturbed (illustrated here as the potentiation of some inputs through Hebbian mechanisms) this triggers synaptic scaling, which \textbf{produces a proportional reduction in strength at all synapses} of the right magnitude to return firing to baseline levels. Note that, because this mechanism scales synaptic strength up or down proportionally, the relative difference in synaptic strengths induced by Hebbian mechanisms is preserved.[Caption extracted from paper].}
+    \label{fig:firing_rate_regulation}
 \end{figure}
+
+\paragraph{Regulation of firing rate in cultured networks:} Initial observations using cortical cultures indicated that cortical pyramidal neurons maintain a set-point firing rate in the face of changing synaptic input. Cortical and other central neurons in culture form excitatory and inhibitory networks that develop spontaneous activity, and early studies found that blocking this activity for prolonged periods resulted in hyperactivity in these networks when activity was allowed to resume. The reciprocal manipulation — elevating network activity by reducing a fraction of inhibition — initially raises firing rates, but over many hours firing rates fall again until they approach control levels.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=.7\textwidth]{03_PlasticityInTheBrain/figures/pasted_image_5.png}
-    \caption{Pre- and post-synaptic neuron}
-    \label{fig:syn_plas1t}
+    \includegraphics[width=.9\textwidth]{03_PlasticityInTheBrain/figures/firing_rate_homestatis.png}
+    \caption{Evidence for firing rate homeostasis in cultured networks. Cultured cortical networks are composed of interconnected excitatory pyramidal and inhibitory interneurons, and develop spontaneous activity after a few days in vitro (control). This activity can be pharmacologically manipulated for long periods. Blockade for two days of spiking activity with tetrodotoxin (TTX), or of excitatory glutamagergic synapses with CNQX, generates a rebound phenomenon whereby the excitability of the network is increased when the drugs are removed (wash). A more direct test of the idea of firing rate homeostasis is to raise activity acutely with bicuculline (acute bicuculline), and then to follow activity over time. After two days in bicuculline, activity has returned almost to control levels (2 days bicuculline). These experiments, and others like them, indicate that homeostatic mechanisms adjust the cellular and synaptic properties of cortical networks to compensate for changes in synaptic drive.}
+    \label{fig:homeostatis_cultured_nets}
+\end{figure}
+
+
+% Example: isolated neurons are given inhibitors or excitatory chemical. Then washed the chemical effects off and the neuronal activity will spike in the inhibitory neurons and decrease in the artificially excited neurons. 
+
+
+
+\subsubsection{Hebbian Plasticity}
+There are two major forms of plasticity in thenervous system: Hebbian plasticity and homeostatic plasticity.  Hebian plasticity can be considered as a special form of homestatic plasticity. \\
+
+\noindent
+Hebbian plasticity is a synaptic-basis for associative learning. In this form of plasticity synapses change their number in relation to the stimulated synapses. So, it is \textbf{synaptic-specific}. On the other hand, in homestoatic plasticity, as mentioned in the previous section, the synaptic scaling affects all the synapses (more global change in order to maintain the activity of the neural circuit around a target point).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.9\textwidth]{03_PlasticityInTheBrain/figures/hebbian_vs_homeostatic.png}
+    \caption{Comparing Hebbian and homeostatic plasticity. During Hebbian forms of plasticity synapses change their number of AMPARs in an input-specific fashion. Different patterns of activity can either cause strengthening (LTP, top left) or weakening of synapses (LTD, bottom left) via AMPAR trafficking. Potentiation or depression is limited to stimulated synapses, and neighbors are unaffected. In contrast, during homeostatic plasticity altered levels of neuronal activity drives changes in synaptic AMPAR number across the entire dendritic arbor. Blocking pre- and postsynaptic spiking with TTX causes AMPARs to accumulate at excitatory synapses (bottom right). Conversely increasing network activity (for example with a $GABA_A$R antagonist) causes a reduction in synaptic AMPAR (top right). Crucially this form of plasticity conserves the relative strength difference between synapses.}
+    \label{fig:hebbian_vs_homeostatic}
 \end{figure}
 
 
 
-\newpage
-\subsubsection{Hebb’s Idea and STDP}
-Tuning of synapses as seen in homeostatic plasticity can be seen at specific individual synapses. When this occurs it is known as hebbian plasticity. The synapses strength increases to specifically activated neurons. Those neurons that fire together wire together associativity.  
 
-There also can be cooperativity whereby multiple cells are required for spiking. This brings in the idea of associative learning whereby multiple features of an object linked together as it allows for better firing. 
+\subsubsection{Some biological notions}
+\begin{itemize}
+    \item Synaptic scaling = Scaling up or down of the quantal amplitude of all synapses onto a postsynaptic neuron in response to long- lasting changes in neuronal activity.
+    \item Hebbian plasticity = changes in the connection strength between two neurons as a result of correlated firing.
+    \item AMPARS = a subtype of ligand-gated glutamate receptor; these receptors generate the majority of excitatory current at central synapses.
+\end{itemize}
+
+
+% -----------------------------
+\newpage
+\subsection{Hebbian Learning}
+
+\paragraph{Hebb's synapse:} As described by Donald Hebb in \textit{The Organization of Behavior}(1949), “When an axon of cell A is near enough to excite cell B and \underline{repeatedly} or \underline{persistently} takes part in firing it, some growth process or metabolic change takes place in one or both cells such that A's efficiency, as one of the cells firing B, is increased.”.  Hebb postulated that this behavior of synapses in neuronal networks would permit the networks \textbf{to store memories}.\\
+
+\noindent
+We can consider that a \textbf{Hebbian synapse is a “coincidence detector”}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.9\textwidth]{03_PlasticityInTheBrain/figures/Hebb_synapse.png}
+    \caption{Hebb's synapse.}
+    \label{fig:hebb_synapse}
+\end{figure}
+
+\noindent
+
+\paragraph{Recap}
+\begin{itemize}
+    \item Tuning of synapses as seen in homeostatic plasticity can be seen at specific individual synapses. When this occurs it is known as hebbian plasticity. The synapses strength increases to specifically activated neurons. Those neurons that fire together wire together associativity.  
+    \item There also can be cooperativity whereby multiple cells are required for spiking. This brings in the idea of associative learning whereby multiple features of an object linked together as it allows for better firing. 
+\end{itemize}
+
+\subsubsection{Spike-Timing Dependent Plasticity (STDP)}
+\begin{itemize}
+    \item STDP is a \textbf{temporally asymmetric} form of Hebbian learning induced by tight temporal correlations between the spikes of pre- and postsynaptic neurons\footnote{\url{http://www.scholarpedia.org/article/Spike-timing_dependent_plasticity}}.
+    \item It is observed that repeated pre-synaptic spike arrival a few milliseconds before postsynaptic action potentials leads in many synapse types to Long-Term Potentiation (LTP) of the synapses. Therefore, the synaptic weight is increased.
+    \item On the other hand, repeated spike arrival after postsynaptic spikes leads to Long-Term Depression (LTD) of the same synapse, where the synaptic weight is reduced.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.9\textwidth]{03_PlasticityInTheBrain/figures/STDP.png}
+    \caption{Spike-Timing Dependent Plasticity (schematic): The STDP function shows the change of synaptic connections as a function of the relative timing of pre- and postsynaptic spikes after 60 spike pairings. Schematically redrawn after Bi and Poo (1998) (Note that the y-axis is normalized).}
+    \label{fig:STDP}
+\end{figure}
+
+
 
 \begin{figure}[H]
     \centering
@@ -124,14 +208,75 @@ There also can be cooperativity whereby multiple cells are required for spiking.
 
 Writing down hebbian learning it can be thought of as a H a function that detects the correlation of pre and postsynaptic potentials leading to a weight change. 
 
-What was Geoffrey’s Problem with Hebbian Learning?
-It isn’t error driven, in bp the neurons are trained so that everyone is optimised. These errors are important for hierarchical learning to gain correct responses. 
 
-Multi Factor or neohebbain learning. 
+
+\subsubsection{Hebb's idea and associative memory: Hebbian cell assembly}
+\begin{itemize}
+    \item Synaptic plasticity helps us form memories that we can recall at a later stages in our lives.
+    \item One of the most iconic concepts of memory formation is the notion of the \textbf{Hebbian cell assembly}. Under this notion, \textbf{Hebbian learning is believed form associative memory traces or engrams}.
+    
+\end{itemize}
+\paragraph{Hebbian cell assembly:} "A Hebbian cell assembly is formed when an ensemble of neurons is repeatedly co-activated. This co-activation is thought to trigger experience-dependent “Hebbian plasticity” which causes a strengthening of the excitation connections between the co-active neurons. This so formed assembly can now be seen as an associative memory engram. The memory can be recalled by only activating a subset of the neurons within a given assembly. By dint of the strong connections, the activity can then spread to re-activate the whole assembly."\footnote{https://zenkelab.org/research/synaptic-plasticity-and-homeostasis/}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.8\textwidth]{03_PlasticityInTheBrain/figures/hebb_cell_assembly.png}
+    \caption{Formation of Hebbian cell assembly with experience}
+    \label{fig:cell_assembly}
+\end{figure}
+
+\paragraph{Specificity and associativity:} Both are consequences of Hebbian rule.
+\begin{itemize}
+    \item \textbf{Specificity} implies that only pre-synaptic neurons that are active during the depolarization of the post-synaptic neuron tend to have their synapse on the post-synaptic neuron strengthened.
+    \item \textbf{Associativity} implies that two pre-synaptic neurons who fire at the same time, together depolarizing the same post-synaptic cell, will tend to have their synapses on the post-synaptic cell strengthened \textbf{MORE} than if either of the two cells had fired individually--the greater degree of depolarization due to the cells firing together causes the two pre-synaptic neurons to associate on the post-synaptic neuron. Further, pre-synaptic cells that have a strong synapse on a post-synaptic cell can have the effect of pulling other more weakly connected cells towards the post-synaptic cell if the other cells fire at the same time as the stronger-synapsing cell.
+\end{itemize}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.8\textwidth]{03_PlasticityInTheBrain/figures/specificity_associativity.png}
+    \caption{Two consequences of Hebbian rule: specificity and associativity}
+    \label{fig:specificity_associativity}
+\end{figure}
+
+
+\subsubsection{The Problem with Hebbian Learning}
+One of the main concerns of Geoffrey Hinton regarding Hebbian learning is that lack of a teaching signal. In other words, this learning rule is not error-driven; synaptic weights are updated relying on the correlation between the pre- and post synaptic activities. In his paper \footnote{The Ups and Downs of Hebb Synapses. 2003}, he states that even for rather simple tasks, the "Hebbian" approach was seen as "inferior" to other error-driven methods that use the product of the pre-synaptic activity and the post-synaptic activity derivatives.\\
+
+\noindent
+In backprop, the neurons are trained so that everyone is optimised. These errors are important for hierarchical learning to gain correct responses. \\
+
+\noindent
+One solution for this problem is\textbf{ three-factor Hebbian learning.} 
+\subsubsection{Three-Factor Hebbian Learning}
+Associative (Hebbian) learning indicates association between \textbf{two factors} (two sensory inputs or an input and an output). Here the idea is to introduce another factor for modulating the plasticity. This additional factor "may represent, for example, rewards, supervised errors, summary statistics, or attentional feedback, which could be used to facilitate different types of learning by providing more global information about how well the whole network is performing or how important a current situation is."\footnote{Kusmierz,Isomura and Toyoizumi. Learning with three factors: modulating Hebbian plasticity with errors. Current Opinion in Neurobiology.2017}. \\
+
+This rule can hence be written as follows:
+\begin{equation}
+    \dot{w}= F(M,\; pre, \;post)
+\end{equation}
+
+Three-factor rules have also been called “neoHebbian” (Lisman et al., 2011; Lisman, 2017) or \textbf{"heterosynaptic" (modulatory-input dependent)}.
+
 The M acts as the third factor, it could be the error that allows it to become error driven. Biologists are examining this could be a global reward like dopamine or local activity. 
 
+% --------------------------------------
+\subsection{Non-Hebbian Plasticity: Heterostatic Plasticity}
+There are two broad categories of synaptic plasticity, generally referred to as \textbf{homosynaptic} and \textbf{heterosynaptic} plasticity.
 
-\subsubsection{Heterostatic Plasticity}
+\begin{itemize}
+    \item Homostatic plasticity is what we have been discussing with the Hebbian syapases: a synapse-specific strengthening (facilitation) or weakening (depression) based on the activity of pre- and post-synaptic neurons. In fact the three characteristics: homosynaptic plasticity, associativity and input specificity form the modern definition of the Hebbian synapse.
+    
+    \item Heterostatic plasticity refers to synaptic weight adaptation (facilitation or depression) based on the firing of a third modulatory interneuron. It is therefore referred to as non-hebbian plasticity.
+    
+\end{itemize}
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.8\textwidth]{03_PlasticityInTheBrain/figures/homostatic_heterostatic.png}
+    \caption{Homosynaptic and heterosynaptic mechanisms for long-term plasticity. a) The plastic changes that underlie long-term memory follow a homosynaptic rule, that is, the events responsible for triggering synaptic strengthening occur at the same synapse as is being strengthened. These changes can result in an increase in synaptic strength (for example, homosynaptic facilitation), or a decrease in synaptic strength (for example, homosynaptic depression). b) Synaptic strengthening between a presynaptic and a postsynaptic cell can occur as a result of the firing of a third neuron, a modulatory interneuron, whose terminals end on and regulate the strength of the specific synapse. These changes can result in an increase (heterosynaptic, modulatory facilitation) or in a decrease (heterosynaptic inhibition) in synaptic strength}
+    \label{fig:syn_plas1t}
+\end{figure}
+
 Is the modulation of the input into the post from the presynaptic neuron. This then leads to the change in the post either facilitatory with excitatory inputs or inhibitory with inhibitory inputs. 
 
 Example Fly: neurons come into a brain area these act to modulate postsynaptic neurons. With greater activation the pre synatpic neurons grow irrespective of the postsynaptic activity.
@@ -139,34 +284,81 @@ Example Fly: neurons come into a brain area these act to modulate postsynaptic n
 Example 2: A the brain receives a reward it acts to modulate the synapse. It then changes the STDP profile it causes an increase in the synaptic strength irreseptic if the post or pre fires first. This is known as a Heterostatic Modulation.
 
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=.8\textwidth]{03_PlasticityInTheBrain/figures/pasted_image_8.png}
-    \caption{Heterostatic Plasticity}
-    \label{fig:syn_plas1t}
-\end{figure}
-
-
-
-
-
 \subsubsection{Behavior time scale Plasticity}
 
-STP and STD (short term depression and potentiation) this occurs in the short term memory seconds to minutes, LTD and LTP occurs between seconds to minutes. 
-The longer time scales the formation of new synapses as result short term processes hours to months. 
-Then the ultra long time scales is the structural changes in brain regions. Months to lifetime.
 
 
 
 \subsubsection{Time scales of synaptic plasticity (short term, LTP/LTD)}
-Short term plasticity, determined by the amount of nts present, Short term depression occurs as there are less nts present. The nts in the cleft are reabsorbed leading to a restocking of the nts in the neuron. 
+STP and STD (short term depression and potentiation) this occurs in the short term memory seconds to minutes, LTD and LTP occurs between seconds to minutes. 
+The longer time scales the formation of new synapses as result short term processes hours to months. 
+Then the ultra long time scales is the structural changes in brain regions. Months to lifetime.
 
-Short term facilitation results as increasing spiking leads to more Ca ions within the cell, this results in a greater spiking. 
+This can be summarized as:
+\begin{enumerate}
+    \item Short term facilitation/depression [seconds to hours]
+    \item Long term facilitation/depression
+    \item Generation of new synapses (synaptic pruning) [hours to months]
+    \item Structural changes in neuronal networks [months to lifetime]
+\end{enumerate}
 
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.8\textwidth]{03_PlasticityInTheBrain/figures/timescale_plasticity.png}
+    \caption{Timescales of Neuronal Plasticity}
+    \label{fig:timescales}
+\end{figure}
+
+\subsubsection{Short term plasticity (STP)}
+Once again, there are two types of short-term plasticity (STD): Short-Term Depression (STD) and Short-Term Facilitation (STF). 
+
+\begin{itemize}
+    \item [--]STD is caused by depletion of neurotransmitters consumed during the synaptic signaling process at the axon terminal of a pre-synaptic neuron, 
+    \item [--] STF is caused by influx of calcium into the axon terminal after spike generation, which increases the release probability of neurotransmitters
+    \item [--]STP has been found in various cortical regions and exhibits great diversity in properties (Markram et al., 1998, Dittman 2000, Wang 2006)).
+    \item [--]Synapses in different cortical areas can have varied forms of plasticity, being either STD-dominated, STF-dominated, or showing a mixture of both forms.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.8\textwidth]{03_PlasticityInTheBrain/figures/STD.png}
+    \caption{Short-term depression}
+    \label{fig:STD}
+\end{figure}
 
 %---------------------------
 \subsection{The Hippocampus as a model system to study neural plasticity}
-Hippocampus is a model system of learning and memory. Important system in the storage of memory. Cells between Ca3 and CA1 are used to encode places. This has been shown in rat experiments with the morris water maze. MWM is when a mouse is placed in a drum of milky white water and the mouse must find the platform and it’s movement is tracked with a camera. Over time the mouse will learn where the platform is. If certain receptors important to LTP and LTD the mouse does not learn. It shows that the learning is dependant on synaptic plasticity and hippocampus.
+Hippocampus (HC) is a model system of learning and memory. \\
+\noindent
+Role of HC in learning and memory has been shown with rat experiments with the Morris Water Maze(MWM). MWM is large pool of opaque water where the rats are placed. The rats were trained to find and escape onto a platform which was hidden. Authors show that chronic infusion of an NMDA antagonist leads to impairment in place learning.\\
+
+\noindent
+\underline{\textbf{To summarize:}}
+\begin{itemize}
+    \item Recent work has shown that the hippocampus contains a class of receptors for the excitatory amino acid glutamate that are activated by N-methyl-D-aspartate (NMDA) and that exhibit a peculiar dependency on membrane voltage in becoming active only on depolarization.
+    \item Blockade of these sites with the drug aminophos-phonovaleric acid (AP5) does not affect synaptic transmission in the hippocampus, but \textbf{prevents the  LTP} following brief high- frequency stimulation.
+
+\end{itemize}
+
+% is tracked with a camera. Over time the mouse will learn where the platform is. If certain receptors important to LTP and LTD  are blocked, the mouse does not learn. It shows that the learning is dependant on synaptic plasticity and hippocampus.
+
+\subsubsection{Most studied synapse in HC: CA3 $\rightarrow$ CA1}
+\begin{itemize}
+    \item The main pyramidal cell layers in HC are the CA1-4 regions (principally CA1 and CA3) and the dentate gyrus.
+
+\end{itemize}
+
+ \paragraph{Schaffer Collateral/Associational Commissural Pathway:}\footnote{\url{http://www.bristol.ac.uk/synaptic/pathways/}} This pathway is derived from axons that project from the CA3 region of then hippocampus to the CA1 region. The axons either come from neurons in the same hippocampus (ipsilateral) or from the other hippocampus (contralateral). These latter fibres are termed commissural fibres, as they cross from one hemisphere of the brain to the other. This pathway is utilised very extensively exhibits to study NMDA receptor-dependent LTP and LTD.
+ 
+ \begin{figure}[H]
+    \centering
+    \includegraphics[width=.6\textwidth]{03_PlasticityInTheBrain/figures/ca3_ca1.png}
+    \label{fig:HC_synapses}
+\end{figure}
+    
+
 
 \begin{figure}[H]
     \centering

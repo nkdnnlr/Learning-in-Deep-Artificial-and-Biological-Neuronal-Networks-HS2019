@@ -152,8 +152,8 @@ Example rewards:
     \item Fly stunt maneuvers in an RC helicopter (+ following desired trajectory, - crashing)
     \item Defeat the world champion at Backgammon (+ winning /- loosing)
     \item Manage an investment portfolio (+ more / -  less money)
-    \item Make a humanoid robot walk (+ reward for forward motion / − reward for falling over)
-    \item Play Atari games better than humans (+/− reward for increasing/decreasing score)
+    \item Make a humanoid robot walk (+ reward for forward motion / - reward for falling over)
+    \item Play Atari games better than humans (+/- reward for increasing/decreasing score)
 \end{itemize}
 
 The fact that reward presented to the agent is not always immediate leads to the exploration / exploitation dilemma. (Example: A financial investment may take months to mature). 
@@ -223,7 +223,7 @@ This is called the model. Model free RL uses tricks to not compute / require thi
 	\caption{A small example of a mice showing all the agent related components together with some numbers. (top left) Actions, start, end and definition of other states (the maze). (top right) immediate rewards. (bottom) Policy and value function for each state.}
 \end{figure}
 
-Some details to Figure \ref{fig:rl-example}:
+Some details to Figure \cref{fig:rl-example}:
 \begin{itemize}
     \item Agent may have an internal model of the environment.
     \item Dynamics: How actions change the state.
@@ -260,7 +260,7 @@ Model Free vs model based: We can have a policy and/or a value function in each 
 \end{figure}
 
 \subsection{Planning}
-Even tho planning appears later in the lecture it is actually the logical step before we arrive at RL. It is  a more constrained view where a model of the environment is known. 
+Even though planning appears later in the lecture it is actually the logical step before we arrive at RL. It is  a more constrained view where a model of the environment is known. 
 The agent performs computations with its model (without any external interaction). 
 This is a simplification compared to RL where the environment is initially unknown and the agent may only discover it by interacting with the environment. 
 In RL, the agent improves its policy or value function.
@@ -394,7 +394,7 @@ Almost all RL problems can be formalized as MDPs:
 	\centering
 	\includegraphics[width=0.9\linewidth]{08_ReinforcementLearning/figures/mdp-example.png}
 	\label{fig:mrp-example}
-	\caption{The MC of \ref{fig:mrp-example} extended to be a MRP extended again to be an MDP. However we should be careful with the comparisons. In the MRP, our agent was guided purely by randomness and we had no choice. Now, the agent is able to directly influence its path. Note that some of the transitions are deterministic. For example if we quit facebook, we are for sure back to studying, however if were in the pup, we might be too drunk and randomness influences the outcome.}
+	\caption{The MC of \cref{fig:mrp-example} extended to be a MRP extended again to be an MDP. However we should be careful with the comparisons. In the MRP, our agent was guided purely by randomness and we had no choice. Now, the agent is able to directly influence its path. Note that some of the transitions are deterministic. For example if we quit facebook, we are for sure back to studying, however if were in the pup, we might be too drunk and randomness influences the outcome.}
 \end{figure}
 
 One can see that we are very close now to what we introduced in the RL section, however one key piece is missing.  Given that we have choice as an agent now, how do we know the optimal behavior?
@@ -437,7 +437,7 @@ In MDP, we must somehow include the actions. Over the entire task, the actions w
 
 \begin{itemize}
     \item The state-value function $v_\pi(s)$ of an MDP is the expected return starting from state $s$, and then following policy $\pi$.
-    \item The action-value function $q_\pi(s,a)$ is the expected return starting from state $s$, taking action $a$, and then following policy π.
+    \item The action-value function $q_\pi(s,a)$ is the expected return starting from state $s$, taking action $a$, and then following policy $\pi$.
 \end{itemize}
 
 We may rewrite both in a similar maner as we did in the MRP case.
@@ -480,13 +480,11 @@ You may noticed that we depend on the policy for  $v^*(s)$ and $q^*(s,a)$.
 An optimal policy can be found by maximizing over the optimal Q-function $q^*(s,a)$:
 
 \begin{equation*}
-
 \pi^*(a|s) =     
 \begin{cases}
     1, & \text{if } a = argmax_{a \in A}(q^*(s,a)) \\
     0, & \text{otherwise}
 \end{cases}
-    
 \end{equation*}
 
 
@@ -556,6 +554,10 @@ This is again the temporal difference rule.
 \end{figure}
 
 
-
+\subsection{Questions}
+\begin{itemize}
+    \item If the neocortex mostly performs unsupervised learning why does the Vental Degmental Area (VTA) strongly project to almost all cortical areas?
+    \item What is the effect of dopamine (DA) on a cortical neuron?
+\end{itemize}
 
 \end{document}
