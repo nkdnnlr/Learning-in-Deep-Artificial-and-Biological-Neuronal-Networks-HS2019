@@ -53,7 +53,7 @@ $$\frac{\partial E}{\partial w_{ji}} = \frac{\partial \frac{1}{2} (t_i - y_i)^2}
 
 Assuming a model structured similarly as in the perceptron and ADALINE learning rules with a single layer between inputs and the output value, this yields:
 
-$$\grad w_{ji} = \alpha (t_i - y_i) g^'(h_i) x_i$$
+$$\nabla w_{ji} = \alpha (t_i - y_i) g^'(h_i) x_i$$
 
 for some learning rate $\alpha$, target value $t_i$ and output $y_i$, derivative $g'$ of the activation function $g$, sum of inputs $h_i$, and input $x_i$.
 
@@ -76,7 +76,7 @@ Spike-timing dependent plasticity is the Hebbian learning concept of weights bet
 
 We can start by writing a simple Hebbian weight update as the product of the input and output with some scaling factor:
 \begin{align}
-    \grad w &= \alpha \times x \times y\\
+     w &= \alpha \times x \times y\\
         &= \alpha \times x \times [w \cdot x]\\
 \end{align}
 
@@ -84,7 +84,7 @@ The more closely aligned $w$ and $x$ are, the larger $y = w^T x$ is, and by defi
 
 Let's explore some other ways to express this Hebbian update rule:
 \begin{align}
-    \grad w &= \alpha \times x \times y\\
+    \nabla w &= \alpha \times x \times y\\
         &= \alpha (w \cdot x) x\\
         &= \alpha (x \cdot x^T) \cdot w
 \end{align}
@@ -92,7 +92,7 @@ where the last step involves a transformation of the inner product into an outer
 
 We note that $x \cdot x^T$ is the correlation matrix of the vector $x$, which we denote as $C$. \textit{This is distinct from the covariance matrix.} We now arrive at:
 \begin{align}
-    \grad w &= \alpha (x \cdot x^T) \cdot w\\
+    \nabla w &= \alpha (x \cdot x^T) \cdot w\\
         &= \alpha \times C \cdot w\\
     \text{which leads to the following update over time:}\\
     \frac{\partial w}{\partial t} &= C \cdot w
@@ -104,7 +104,7 @@ The lecture slides go into some more detail describing that applying the classic
 
 A modification of the Hebbian rule above in which a weight decay term is added. As this weight decay term is proportional to $y^2$, a quadratic result, it eventually limits the magnitude of the weights $w$ to unit length while maintaining the tendency of the weights to point in the direction of maximum variance.
 \begin{align}
-    \grad w_{oja} = \grad w - y^2 \times w &= \alpha \times x \times y - y^2 \times w\\
+    \nabla w_{oja} = \nabla w - y^2 \times w &= \alpha \times x \times y - y^2 \times w\\
         &= \alpha \times y (x - y \times w)
 \end{align}
 
@@ -115,11 +115,11 @@ Another modification of the Hebbian rule above uses an idea similar to mean-cent
 Notation: $\langle \cdot \rangle$ denotes the mean of the variable over the input samples.
 
 \begin{align}
-    \grad w_{cov} &= \alpha \big[y - \langle y\rangle\big]\big[x - \langle x\rangle\big]\\
+    \nabla w_{cov} &= \alpha \big[y - \langle y\rangle\big]\big[x - \langle x\rangle\big]\\
         &= \alpha \big[y \times x - \langle y\rangle \times x - y \times \langle x\rangle + \langle y\rangle \times \langle x\rangle\big]
 \end{align}
 \begin{align}
-    \langle \grad w_{cov}\rangle &= \alpha \big[\langle y \times x\rangle - \langle \langle y\rangle \times x\rangle - \langle y \times \langle x\rangle\rangle + \langle \langle y\rangle \times \langle x\rangle\rangle\big]\\
+    \langle \nabla w_{cov}\rangle &= \alpha \big[\langle y \times x\rangle - \langle \langle y\rangle \times x\rangle - \langle y \times \langle x\rangle\rangle + \langle \langle y\rangle \times \langle x\rangle\rangle\big]\\
     &= \alpha \big[\langle y \times x\rangle - \langle y\rangle \times \langle x\rangle - \langle y\rangle \times \langle x\rangle + \langle y\rangle \times \langle x\rangle\big]\\
     &= \alpha \big[\langle y \times x\rangle - \langle y\rangle \times \langle x\rangle\big]
 \end{align}
