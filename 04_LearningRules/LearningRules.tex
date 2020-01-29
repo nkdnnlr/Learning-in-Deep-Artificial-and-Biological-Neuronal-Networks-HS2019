@@ -51,11 +51,11 @@ $$E = \frac{1}{2} (t_i - y_i)^2$$
 Finding the appropriate weight updates according to the gradient descent optimization method requires calculating the change in error with respect to each weight that we wish to update. This can be expressed as:
 $$\frac{\partial E}{\partial w_{ji}} = \frac{\partial \frac{1}{2} (t_i - y_i)^2}{\partial w_{ji}}$$
 
-Assuming a model structured similarly as in the perceptron and ADALINE learning rules with a single layer between inputs and the output value, this yields:
+Assuming a model structured similarly as in the perceptron and ADALINE learning rules with a single layer between inputs and the output value and using as the activation function $g(x)=\Theta(x)$ the heavyside function, this yields:
 
-$$\nabla w_{ji} = \alpha (t_i - y_i) g^'(h_i) x_i$$
+$$\nabla w_{ji} = \alpha (t_j - y_j) g'(h_j) x_i$$
 
-for some learning rate $\alpha$, target value $t_i$ and output $y_i$, derivative $g'$ of the activation function $g$, sum of inputs $h_i$, and input $x_i$.
+where we used $h_j=x_{i}w_{ji}$ as inputs, $y_j = g(h_j)$ as outputs, $t_j$ as target value, learning rate $\alpha$ and the derivative $g'$ of the activation function $g$ w.r.t..
 
 The weight update equation for the DELTA learning rule clearly shares some similarities with that of the perceptron learning rule. Both weight update equations contain an error term calculated by the difference between the target and output values $(t_i - y_i)$ multiplied with the input $x_i$. However, the DELTA learning rule adds some complexities as it incorporates a learning rate $\alpha$ to adapt learning as well as the derivative of the activation function applied to the sum of the inputs $g'(h_j)$.
 

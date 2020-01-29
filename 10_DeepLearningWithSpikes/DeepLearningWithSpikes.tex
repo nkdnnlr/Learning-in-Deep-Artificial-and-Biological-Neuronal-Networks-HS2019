@@ -84,7 +84,7 @@ where $\tau = RC$ is the time constant of the circuit.
     \label{fig:my_label}
 \end{figure}
 %
-Now the second part of the leaky integrate-and-fire neuron is the firing and re-setting of the voltage after the neuron-specific threshold has been reached. At the firing time $t^{f}: U(t^{f}) = \theta$, the neuron fires (with a not-here-to-be-defined spike-form), the firing time is noted and immediately after the voltage reset to a new value $U_rest < \theta$:
+Now the second part of the leaky integrate-and-fire neuron is the firing and re-setting of the voltage after the neuron-specific threshold has been reached. At the firing time $t^{f}: U(t^{f}) = \theta$, the neuron fires (with a not-here-to-be-defined spike-form), the firing time is noted and immediately after the voltage reset to a new value $U_{rest} < \theta$:
 \begin{equation}
     \lim_{\delta \to 0; \delta > 0} U(t^{(f)} + \delta) = U_{rest}
 \end{equation}
@@ -98,13 +98,27 @@ Now the second part of the leaky integrate-and-fire neuron is the firing and re-
 \end{figure}
 %
 \paragraph{Exponential postsynaptic currents: }
-\hl{?? Please help, I don't really get it}
-We also want to model the synapse. The following differential equation describes the evolution of the postsynaptic current $I(t)$:
+We also want to model the synapse. Activation of a presynaptic neuron results in a release of neurotransmitters into the synaptic cleft. The transmitter molecules diffuse to the other side of the cleft and activate receptors that are located in the postsynaptic membrane. In both cases, the activation of the receptor results in the opening of certain ion channels and, thus, in an excitatory or inhibitory postsynaptic transmembrane current (EPSC or IPSC). The main mechanism for carrier transport underlying this current is diffusion of the ions passing from the extracellular space into the cell. Instead of developing a mathematical model of the transmitter concentration in the synaptic cleft, we keep things simple and describe transmitter-activated ion channels as an explicitly time-dependent conductivity. This conductivity change most often modelled as an exponentially decaying function, to represent the effect of closing ion channels. The following differential equation describes the evolution of the postsynaptic current $I(t)$:
 %
-\begin{equation}
+\begin{equation}\label{eq:syn}
 \frac{\mathrm{d}}{\mathrm{d} t} I(t)=-\frac{I(t)}{\tau_{\mathrm{syn}}}+S(t)
 \end{equation}
 %
+
+and is derived starting from the decaying exponential we want to model:
+
+\begin{equation}
+    I(t) = I_0 e^{\frac{-t}{\tau}}
+\end{equation}
+\begin{align}
+    ln(I(t)) &= ln(I_0) + ln(e^{\frac{-t}{\tau}}) \\
+    &= ln(I_0) - \frac{t}{\tau} | \frac{dI(t)}{dt} \\
+    \frac{1}{I(t)} \frac{I(t)}{dt} &= -\frac{1}{\tau} \\
+    \frac{dI(t)}{dt} &= -\frac{I(t)}{\tau} 
+\end{align}
+
+Considering the changes arising due to the discrete APs, the term $S(t)$ added in Equation \ref{eq:syn} determines an instantaneous increase in the postsynaptic current proportional to the synaptic weight.
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.55\linewidth]{10_DeepLearningWithSpikes/figures/exp_ps_current.png}
@@ -113,8 +127,9 @@ We also want to model the synapse. The following differential equation describes
 \end{figure}
 %
 \paragraph{The spike response model (SRM):}
-\hl{?? Also here}
-So far, we have described neuronal dynamics in terms of systems of differential equations. There is another approach called the ‘filter picture’. In this picture, the parameters of the model are replaced by (parametric) functions of time, generically called ‘filters’. The neuron model is therefore interpreted in terms of a membrane filter as well as a function describing the shape of the spike and, potentially, also a function for the time course of the threshold. Together, these three functions establish the Spike Response Model (SRM).
+\hl{?? Also here} 
+So far, we have described neuronal dynamics in terms of systems of differential equations. There is another approach called the ‘filter picture’. In this picture, the parameters of the model are replaced by (parametric) functions of time, generically called ‘filters’. The neuron model is therefore interpreted in terms of a membrane filter as well as a function describing the shape of the spike and, potentially, also a function for the time course of the threshold. Together, these three functions establish the Spike Response Model (SRM). More info here: https://neuronaldynamics.epfl.ch/online/Ch6.S4.html
+
 Mathematically speaking, we integrate over the differential equation, then replace the integration times multiplications with convolutions of filter kernels over the spikes:
 %
 \begin{equation}
@@ -145,16 +160,16 @@ Can we do supervised learning in spiking multi-layer networks with a local onlin
 There is different ways of representing a spike train. If the spikes are seen to be discrete units, the spike train $S(t)$ is given simply by
 %
 \begin{equation}
-    S_{\delta}(t) = \sum_i^M \delta_{VR}(t-t_i)
+    S(t) = \sum_i^M \delta(t-t_i)
 \end{equation}
 %
-Replacing the delta function associated with each spike with an exponential function, that is, add an exponential tail to all spikes, leads to
+Replacing the delta function associated with each spike with an exponential function, that is, add an exponential tail to all spikes, leads to another definition of a spike train:
 %
 \begin{equation}
     S(t) = \sum_i^M H(t-t_i)\exp{-(t-t_i)/t_c},
 \end{equation}
 %
-where $H(t)$ is the heavyside function. Then, the loss between the target spikes distance $\hat{S}$ and the output spikes distance $S$ can be defined as the Van Rossum distance:
+where $H(t)$ is the heavyside function. The loss between the target spikes distance $\hat{S}$ and the output spikes distance $S$ can be defined as the Van Rossum distance:
 %
 \begin{equation}
 \mathcal{L}=\frac{1}{2} \int_{-\infty}^{t}[\lambda *(\hat{S}(s)-S(s))]^{2} ds
@@ -242,13 +257,52 @@ One way to overcome those issues is by applying feedback-alignment, which is wel
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\linewidth]{10_DeepLearningWithSpikes/figures/feedbackalignment.png}
-    \caption{Network trained to solve a nonlinearly separable classification problem with noisy input neurons. \textbf{(a)} Sketch of network layout with two output units and four hidden units. \textbf{(b)} Snapshot of network activity at the end of training with random feedback. Four input patterns from two nonlinearly separable classes are presented in random order (shaded areas). In between stimulus periods, input neurons spike randomly with 4 Hz background firing rate. \textbf{(c)} Learning curves of 20 trials with different random initializations (gray) for a network with random feedback connections that solves the task. The average of all trials is given by the black line. The average of 20 simulation trials with an additional regularization term (see section 3) is shown in green. \textbf{(d)} Same as panel c but for a network without hidden units that cannot solve the task. \textbf{(e)} Same as panel c but for symmetric feedback. \textbf{(f)} Same as panel c but for uniform ("all ones") feedback connections.}
+    \caption{Network trained to solve a non-linearly separable classification problem with noisy input neurons. \textbf{(a)} Sketch of network layout with two output units and four hidden units. \textbf{(b)} Snapshot of network activity at the end of training with random feedback. Four input patterns from two non-linearly separable classes are presented in random order (shaded areas). In between stimulus periods, input neurons spike randomly with 4 Hz background firing rate. \textbf{(c)} Learning curves of 20 trials with different random initialisations (gray) for a network with random feedback connections that solves the task. The average of all trials is given by the black line. The average of 20 simulation trials with an additional regularization term (see section 3) is shown in green. \textbf{(d)} Same as panel c but for a network without hidden units that cannot solve the task. \textbf{(e)} Same as panel c but for symmetric feedback. \textbf{(f)} Same as panel c but for uniform ("all ones") feedback connections.}
     \label{fig:my_label}
 \end{figure}
 
 
 \subsubsection{Sequence-to-sequence learning}
+Because zero error was achieved with simple tasks using different types of feedback signal, the learning rule can be put to work in harsher conditions, under more challenging tasks: making it associate an spatio-temporal target output pattern to a repeating frozen Poisson noise input. In this case, a larger, 3-layer net was used (100 in, variable number hidden, 100 out), but an output pattern matching the target was achieved with only 32 hidden neurons. The random feedback performs worse than a network that was trained without a hidden layer, but with symmetrical weights.
 
+%
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{10_DeepLearningWithSpikes/figures/spatio.PNG}
+    \caption{Network trained to solve a nonlinearly separable classification problem with noisy input neurons. (a) Sketch of network layout with two output units and four hidden units. (b) Snapshot of network activity at the end of training with random feedback. Four input patterns from two nonlinearly separable classes are presented in random order (shaded areas). In between stimulus periods, input neurons spike randomly with 4 Hz background firing rate. (c) Learning curves of 20 trials with different random initializations (gray) for a network with random feedback connections that solves the task. The average of all trials is given by the black line. The average of 20 simulation trials with an additional regularization term (see section 3) is shown in green. (d) Same as panel c but fora network without hidden units that cannot solve the task. (e) Same as panel c but for symmetric feedback. (f) Same as panel c but for uniform (“all ones”) feedback connections.}
+    \label{fig:my_label}
+\end{figure}
+%
+
+The rule can also be used as an auto-encoder network, since it can be provided the same pattern as both input and output. It is able to reconstruct the output pattern with high fidelity while having a number of hidden units smaller than the number of units in the input and output layers.
 \subsection{Spiking nets and temporal coding}
 
+The RNN term is used in its widest sense, that of networks with states evolving in time based on well-defined dynamic recurrent equations. An important fact to note is that, while recurrent synaptic connections between neurons in a network give rise to recurrent dynamics, they are not absolutely necessary, as dynamical recurrent can arise without them. This is the case of neurons or synapses which have states which evolve according to internal dynamics: the current state depends on the previous state and the next state depends on the current state, thus state-full units are inherently recurrent.
+
+This idea can be very well applied to SNNs, with computations necessary to update a cell state that can be unrolled in time as seen in Figure \ref{fig:snn_unroll}.
+
+%
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{10_DeepLearningWithSpikes/figures/snns_unroll.PNG}
+    \caption{Illustration of the computational graph of a SNN in discrete time. Time steps flow from left to right. Input spikes S(0) are fed into the network from the bottom and propagate upwards to higher layers. The synaptic currents I are decayed by $\alpha$ in each time step and fed into the membrane potentials U. The U are similarly decaying over time as characterized by $\beta$. Spike trains S are generated by applying a threshold non-linearity to the membrane potentials U in each time step. Spikes causally affect the network state (orange connections). First, each spike causes the membrane potential of the neuron that emits the spike to be reset. Second, each spike may be communicated to the same neuronal population via recurrent connections V(1). Finally, it may also be communicated via W(2) to another downstream network layer or, alternatively, a readout layer on which a cost function is defined.}
+    \label{fig:snn_unroll}
+\end{figure}
+%
+
+The Back-propagation rule can be applied to RNNs. In this case the recurrence is “unrolled” meaning that an auxiliary network is created by making copies of the network for each time step. The unrolled network is simply a deep network with shared feed-forward weights W(l) and recurrent weights V(l), on which the standard BP applies:
+
+\begin{equation}
+    \Delta W_{ij}^{(l)} \propto \frac{\partial \mathcal{L}[x]}{\partial W_{ij}^{(l)}} = \sum_{m=0}^t\delta_i^{(l)}[m]y_j^{(l-1)}[m]
+\end{equation}
+
+\begin{equation}
+    \Delta V_{ij}^{(l)} \propto \frac{\partial \mathcal{L}[x]}{\partial V_{ij}^{(l)}} = \sum_{m=1}^t\delta_i^{(l)}[m-1]y_j^{(l)}[m-1]
+\end{equation}
+
+\begin{equation}
+    \delta_{i}^{(l)}[n] = \sigma'\left(a_i^{(l)}[n]\right)\left(\sum_{k}\delta_k^{(l+1)}[n]W_{ij}^{(T,l)}+ (\sum_{k}\delta_k^{(l)}[n+1]V_{ij}^{(T,l)}\right)
+\end{equation}
+
+Applying BP to an unrolled network is referred to as back-propagation through time (BPTT).
 \end{document}
