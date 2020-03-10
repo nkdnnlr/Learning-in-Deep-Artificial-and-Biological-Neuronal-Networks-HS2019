@@ -17,3 +17,6 @@ The containing information is freely gathered and often copied word-by-word
 from the lecture materials and other from sources, such as books, papers, blog
 entries and Wikipedia. The document is a collaboration between many students,
 some of which are noted in the authors list above.
+
+### Current Version
+[HS2019_LearningInDeepArtificialAndBiologicalNeuronalNetworks.pdf](https://github.com/nkdnnlr/Learning-in-Deep-Artificial-and-Biological-Neuronal-Networks-HS2019/blob/master/HS2019_LearningInDeepArtificialAndBiologicalNeuronalNetworks.pdf)
