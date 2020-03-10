@@ -1,6 +1,5 @@
-# HS2019
 # Learning in Deep Artificial and Biological Neuronal Networks
-#### Student Notes to Lecture by Prof. Dr. Benjamin Grewe at ETHZ
+#### Student Notes to the 2019 Lecture by Prof. Dr. Benjamin Grewe at ETHZ
 
 ### Authors
 Nik Dennler (nik.dennler@uzh.ch)\
