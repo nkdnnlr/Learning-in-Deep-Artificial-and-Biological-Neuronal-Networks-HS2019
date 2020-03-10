@@ -7,11 +7,73 @@
 \section{Questions}
 
 \paragraph{Mock exam}
-\begin{enumerate}
-    \item 
-    \item 
-\end{enumerate}
 
+
+\begin{enumerate}
+    \item Why Spikes (Lecture 9):
+    Several techniques have been developed to better understand neuronal activity. Please answer the following questions on methods used to investigate action potentials.
+  \begin{enumerate}[label*=\arabic*.]
+    \item When recording the membrane potential of a neuron, which changes can be observed during an action potential?
+    \item Explain in a few sentences how the Patch Clamp technique works and what it can be used for.
+    \item Some techniques for imaging neuronal activity involve functional fluorescent indicators. Which signals can be recorded with these techniques?
+    \item Give one reason why an individual neuron might benefit from spiking.
+  \end{enumerate}
+
+    \item Plasticity in the Brain (Lecture 3):
+    Homeostatic Plasticity involves mechanisms which allow neurons to adapt to altered environments whilst maintaining a desired functionality. Answer the following questions about Homeostatic Plasticity.
+  \begin{enumerate}[label*=\arabic*.]
+    \item A potent toxin prevents postsynaptic ion channels from opening. This leads to a rapid decay of postsynaptic potentials (EPSPs). However, after the toxin is removed, the amplitude of postsynaptic potentials is significantly increased in comparison to pre-perturbation. How could this behavior be explained?
+    \item What does the term “scaling” refer to in Homeostatic Plasticity?
+    \item Homeostatic Plasticity is thought to keep local properties of neurons within a certain (physiological, functional, . . . ) range. Discuss in a few sentences how this principle could be used in artificial neural networks.
+    \item What is Heterosynaptic (Heterostatic) Plasticity and which synaptic mechanisms could be involved (give one example)?
+  \end{enumerate}
+
+    \item Learning as Bayesian Inference (Lecture 5):
+    Using Bayesian Inference techniques to train neural networks brings some advantages as well as some new challenges. Answer the following questions about Bayesian inference.
+  \begin{enumerate}[label*=\arabic*.]
+    \item What is $p(w|D)$? Can it be related to a set of weights obtained with error backpropagation?
+    \item How is $p(D)$, the marginal likelihood, problematic? Explain the approach to solve the problem.
+    \item What are relevant properties of the Kullback-Leibler divergence?
+    \item How do $p(w)$ and $q(w)$ compare to each other when $D KL (q(w)||p(w)) = 0$? Learning in deep artificial and biological neuronal networks
+  \end{enumerate}
+
+    \item Unsupervised and Self-Supervised Learning (Lecture 7):
+    Autoencoders are neural networks that learn efficient data encodings in an unsupervised manner. Please answer the following questions on Autoencoders.
+  \begin{enumerate}[label*=\arabic*.]
+    \item In which case can we say that Autoencoders yield a compressed low dimensional representation of the input?
+    \item What does the term “latent representation” mean in the context of Autoencoders?
+    \item Describe how you would use Autoencoders to perform de-noising on a set of inputs.
+    \item Describe the two phases in the wake-sleep algorithm.
+  \end{enumerate}
+
+    \item Deep learning with Spikes (Lecture 10):
+    SuperSpike was recently proposed as an online rule for learning in spiking neural networks. Answer the following questions on SuperSpike.
+  \begin{enumerate}[label*=\arabic*.]
+    \item Why can SuperSpike be considered a three-factor rule?
+    \item The rule includes two convolutions (mathematical operation). What is the algorithmic justification and what is a possible biological interpretation?
+    \item How is the loss of the neural network defined when using this rule?
+    \item How does this rule solve the spike non-linearity problem?
+  \end{enumerate}
+
+    \item Learning Rules (Lecture 4):
+    The DELTA Rule and the Perceptron Learning Rule are both similar but also very different in some properties. Answer the following questions about the DELTA- and the Perceptron Learning rules.
+  \begin{enumerate}[label*=\arabic*.]
+    \item What do the DELTA Rule and the Perceptron Learning Rule have in common?
+    \item Explain in a few sentences, how the DELTA rule works.
+    \item What is the main difference between the two rules with respect to how they have been derived / developed?
+    \item Identify the following equation and explain the terms of the formula $\Delta W ij = α(t i − y i )g 0 (h i )X j$
+  \end{enumerate}
+
+    \item Reinforcement Learning (Lecture 8):
+    Error driven learning is key in reinforcement learning and several learning rules exist. Answer the following questions on different learning rules in RL.
+  \begin{enumerate}[label*=\arabic*.]
+    \item The Rescorla-Wagner Rule is formalized as: $V (s t ) \longleftarrow V (s t ) + \eta [R − sum(V (S t ))]$. What does the term $R − sum(V (S t ))$ represent?
+    \item Name the following rule and correct the mistakes: $V (s t ) \longleftarrow V (s t ) + η[r t + \gamma V (S t ) − V (S t )]$
+    \item Instead of a state value, Q-learning introduces an action value Q. Which two variables does Q depend on and what do they represent?
+    \item When new values are predicted, values of subsequent steps are discounted. What is the rationale behind this?  
+  
+  \end{enumerate}
+\end{enumerate}
 
 \paragraph{Jeopardy}
 
@@ -73,16 +135,143 @@
     \item \textbf{Is synaptic plasticity the only mechanism that neurons can use to alter their effective connectivity?}
     \item \textbf{Is weight tuning by BP the only mechanism in DNNs that affect the weights?}
     \item \textbf{What is the difference between BCM rule and triplet rule?}
-    \item
-    \item
+    \item If the neocortex mostly performs unsupervised learning why does the Vental Degmental Area (VTA) strongly project to almost all cortical areas?
+    \item What is the effect of dopamine (DA) on a cortical neuron?
+    
+    
 \end{enumerate}
 
 
+\paragraph{More Questions}
 
+\begin{enumerate}
+    \item{Lecture 1: Introduction}
+    \begin{enumerate}[label*=\arabic*.]
+        \item How heavy is the brain, how many neurons and how many synapses?
+        \item What is the neocortex?
+        \item Describe Hubel\&Wiesel experiment and its outcomes
+        \item Difference between MP neuron and Perceptron?
+        \item What are parallels and differences of information processing and learning in ANNs and BNNs?
+        \item What is duration of a spike? 
+        \item How fast do APs propagate along axon?
+        \item What is electrophysiology?
+        \item What is Calcium Imaging?
+        \item What is fMRI?
+    \end{enumerate}
+    
+    \item{Lecture 2: Training Methods for Deep ANNs}
+    \begin{enumerate}[label*=\arabic*.]
+        \item What is backpropagation? (Qualitatively and with formulas)
+        \item What are some issues of BP regarding performance?
+        \item What are some issues of BP regarding biological plausibility?
+        \item Explain feedback alignment
+        \item Explain target propagation
+        \item What problem does Direct Target Propagation solve and how?
+        \item How could biological neurons differ between FF and BP error signals?
+        \item How do biological neurons change their incoming weights (synaptic connections)?
+        \item Do biological neurons follow a purely local update rule?
+        \item What is the depth (hierarchical layers) of biological neuronal networks of the human/primate visual system?
+    \end{enumerate}
+    
+    \item{Lecture 3: Plasticity}
+    \begin{enumerate}[label*=\arabic*.]
+        \item Describe a spike generation, starting at the action potential of the presynaptic neuron.
+        \item What are short and long term effects of an increased EPSP?
+        \item Describe associative learning.
+        \item What is homeostatic plasticity?
+        \item What is spike-timing dependent plasticity?
+        \item What is the problem with Hebbian Learning? [Hint: Hinton]
+        \item What is also called heterosynaptic plasticity?
+        \item What is the hippocampus? 
+        \item What ion is mostly involved in controlling LTP and LTP?
+        \item Give some examples for non-synaptic plasticity
+        \item What are the differences between the weights of a deep network and the connections between biological neurons?
+        In deep learning the weights are binary, if a neuron is activity it causes a change in the next layer.
+        In biology if the action potential is modulated (axonal by myelinated and other factors) it will determine if the post neuron is activated, the dendritic epsp can be modulated before it reaches the axon hillock by summation and inhibition signals, the cell can in a refractory period or in excitability this means the effective connective between neurons can be modulated, also the inhibitory nts can modulate the epsp.
+        \item Is synaptic plasticity the only mechanism that neurons can use to alter their effective connectivity?
+    \end{enumerate}
+    
+    \item{Lecture 4: Learning Rules}
+    \begin{enumerate}[label*=\arabic*.]
+        \item What is the perceptron rule?
+        \item What is ADALINE?
+        \item What is the DELTA rule?
+        \item What is Hebbian rule, Oja rule and Covariance rule?
+        \item Describe what Sangers rule does
+        \item What is the BMC rule? 
+        \item Is weight tuning by BP the only mechanism in DNNs that affect the weights?
+        \item What is the difference between BCM rule and triplet rule?
+    \end{enumerate}
+    
+    \item{Lecture 5: Unsupervised/Selfsupervised Learning}
+    \begin{enumerate}[label*=\arabic*.]
+        \item 
+    \end{enumerate}
+    
+    
+    \item{Lecture 6: Unsupervised/Selfsupervised Learning}
+    \begin{enumerate}[label*=\arabic*.]
+        \item
+    \end{enumerate}
+    
+    
+    \item{Lecture 7: Unsupervised/Selfsupervised Learning}
+    \begin{enumerate}[label*=\arabic*.]
+        \item Tell me about sparse coding
+        \item Tell me about competitive learning in NN
+        \item Tell me about different concepts of autoencoders and their cost functions
+        \item What is a Boltzmann machine?
+        \item Tell me about the Helmholtz machine and the wake-sleep algorithm
+        \item What is the re-parametrization trick?
+        \item What is the idea behind predictive coding and what's the neuroscientific background?
+        \item What's the advantages and disadvantages of generative and non-generative unsupervised learning methods?
+        \item Tell me about the Variational Autoencoder
+    \end{enumerate}
+    
+    \item{Lecture 8: Reinforcement Learning}
+    \begin{enumerate}[label*=\arabic*.]
+        \item What is a dopamine neuron? Explain
+        \item What is the Rescola-Wagner rule?
+        \item What is the Temporal difference rule?
+        \item What is Q-learning?
+        \item State the reward hypothesis.
+        \item What is a policy, what a value function?
+        \item What is Bellman's theorem?
+        \item How do we know if a policy is optimal?
+        \item What is the loss function in Deep Reinforcement Learning?
+    \end{enumerate}
 
+w
+    
+    \item{Lecture 10: Unsupervised/Selfsupervised Learning}
+    \begin{enumerate}[label*=\arabic*.]
+        \item
+    \end{enumerate}
+    
+    \item{Lecture 11: Neuromorphic Systems 1}
+    \begin{enumerate}[label*=\arabic*.]
+        \item What neuron property does Neuromorphic engineering try to emulate and how? 
+    \end{enumerate}
+    
+    \item{Lecture 12: Neuromorphic Systems 2}
+    \begin{enumerate}[label*=\arabic*.]
+        \item 
+    \end{enumerate}
 
-
-
+    \item{Lecture 13: Recurrent Neural Networks}
+    \begin{enumerate}[label*=\arabic*.]
+        \item What is back-propagation through time? What are the issues?
+        \item What is one way to solve the exploding, but not the vanishing gradient problem?
+        \item What are LSTM networks?
+        \item Consider the typical depth of a ResNet and compare it with the visual cortex. If there are discrepancies, how could one explain that they both perform fairly well on image processing tasks? 
+    \end{enumerate}
+    
+    \item{Lecture 14: Continual-, Meta- and Transfer Learning}
+    \begin{enumerate}[label*=\arabic*.]
+        \item 
+    \end{enumerate}
+    
+\end{enumerate}
 
 
 

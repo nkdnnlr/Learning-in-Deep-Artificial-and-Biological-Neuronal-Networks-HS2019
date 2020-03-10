@@ -1,3 +1,4 @@
+
 \documentclass[a4paper,10pt]{article}
 %\documentclass[a4paper,10pt]{report}
 \usepackage[utf8]{inputenc}
@@ -21,7 +22,7 @@
 \usepackage{ifthen}
 \usepackage{listings}
 \usepackage[version=4]{mhchem}% e.g. \ce{Ca2+}
-\usepackage[miktex]{gnuplottex}
+% \nmusepackage[miktex]{gnuplottex}
 \usepackage{subcaption}
 \usepackage{subfiles}
 \usepackage[]{algorithm2e}
@@ -33,6 +34,7 @@
 \DeclareMathOperator{\EX}{\mathbb{E}}% expected value
 \DeclareMathOperator*{\argmax}{arg\,max} 
 \DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage{enumitem}
 
 \usepackage{adjustbox}
 
@@ -48,8 +50,10 @@ Learning in Deep Artificial and Biological Neuronal Networks\\
 HS2019\\}
 \author{Authors:\\ 
 Nik Dennler (nik.dennler@uzh.ch)\\
-Ioan-Iutin Fodorut (ifodor@ini.uzh.ch)\ \\
-Raffael Theiler (ratheile@student.ethz.ch) \ \\... \\}
+Ioan-Iutin Fodorut (ifodor@ini.uzh.ch)\\
+Raffael Theiler (ratheile@student.ethz.ch)\\
+Vinay Hiremath (vhirem@uzh.ch)\\
+Farah Baracat (fbaracat@student.ethz.ch)\\}
 
 \begin{document}
 
@@ -57,11 +61,12 @@ Raffael Theiler (ratheile@student.ethz.ch) \ \\... \\}
 
 
 \newpage
+\subfile{00_Disclaimer/Disclaimer.tex}
 
 \tableofcontents
+
 \newpage
 
-\subfile{00_Disclaimer/Disclaimer.tex}
 \subfile{01_Introduction/Introduction.tex}
 \subfile{02_TrainingMethodsForDeepANNs/TrainingMethodsForDeepANNs.tex}
 \subfile{03_PlasticityInTheBrain/PlasticityInTheBrain.tex}

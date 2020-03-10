@@ -52,7 +52,7 @@
 	\noindent
 	If the back-propagation algorithm is used, updating the weights is done by taking the derivatives of the loss $\mathcal{L}(\bm{h}^L(\bm{x}; \theta^{0,L}_W), \bm{y})$ with respect to all weights $\theta^{0,L}_W$: 
 	\begin{equation}
-	w^{j,l}[t+1] = w^{j,l}[\ t\ ] - \eta \frac{\partial \mathcal{L}(\bm{h}^L(\bm{x}; \theta^{0,L}_W), \bm{y}) }{\partial w^{j,l}}
+	w_j^{l}[t+1] = w_j^{l}[\ t\ ] - \eta \frac{\partial \mathcal{L}(\bm{h}^L(\bm{x}; \theta^{0,L}_W), \bm{y}) }{\partial w_j^{l}}
 	\end{equation}
 	%
 	%
@@ -188,7 +188,8 @@ There are variations of feedback alignment, which show to be useful especially f
 \subsection{Target Propagation}
 
 \subsubsection{The Method}
-The main idea is to compute targets rather than gradients, at each layer\footnote{LeCun, "Learning processes in an asymmetric threshold network", 1986},\footnote{Lee\&Bengio et al, "Difference Target Propagation", 2015}. Like gradients, they are propagated backwards. In a way that is related but different from previously proposed proxies for back-propagation which rely on a backwards network with symmetric weights, target propagation relies on auto-encoders at each layer. Unlike back-propagation, it can be applied even when units exchange stochastic bits rather than real numbers. By its nature, target propagation can in principle handle stronger (and even discrete) non-linearities, and it deals with biological plausibility issues (1), (2), (3) and (4) described above. A sketch of the working principle is shown below. 
+The concept of Target Propagation (targetprop) goes back to LeCun 1986\footnote{LeCun, "Learning processes in an asymmetric threshold network", 1986}. The intuition is simple\footnote{\url{http://www.breloff.com/no-backprop-part2/}}: instead of focusing solely on the "forward-direction" model ($y=f(x)$), we also try to fit the "backward-direction" model ($x=g(y)$). $f$ and $g$ form an auto-encoding relationship; $f$ is the encoder, creating a latent representation and predicted outputs given inputs $x$, and $g$ is the decoder, generating input representations/samples from latent/output variables.
+The main idea is to compute targets rather than gradients, at each layer,\footnote{Lee\&Bengio et al, "Difference Target Propagation", 2015}. Like gradients, they are propagated backwards. In a way that is related but different from previously proposed proxies for back-propagation which rely on a backwards network with symmetric weights, target propagation relies on auto-encoders at each layer. Unlike back-propagation, it can be applied even when units exchange stochastic bits rather than real numbers. By its nature, target propagation can in principle handle stronger (and even discrete) non-linearities, and it deals with biological plausibility issues (1), (2), (3) and (4) described above. A sketch of the working principle is shown below. 
 
 \begin{figure}[H]
 	\centering
@@ -243,7 +244,7 @@ The total loss is then composed by the local layer loss and the reconstruction l
 So far, a vanilla Target Propagation did not seem to be successful at all. The biggest reason is, that the learned function $g^j$ will never be a perfect inverse of $f^{j+1}$ and thus the reconstruction loss always large. Difference Target Propagation\footnote{Lee\&Bengio et al, "Difference Target Propagation", 2015} approached this problem by proposing a correction term in the propagated target $\bm{\hat{h}}^{j}$ that should help in getting rid of the reconstruction error:
 %
 \begin{equation}
-    \bm{\hat{h}}^{j} = g^j(\bm{\hat{h}}^{j+1}) + (\bm{h}^{j} - g^i(\bm{h}^{j+1}))
+    \bm{\hat{h}}^{j} = g^j(\bm{\hat{h}}^{j+1}) + (\bm{h}^{j} - g^j(\bm{h}^{j+1}))
 \end{equation}
 %
 Note that if $g^j$ is exactly the inverse, then it is the same as vanilla target propagation. An illustration to direct target propagation is shown below.
@@ -260,13 +261,6 @@ Note that if $g^j$ is exactly the inverse, then it is the same as vanilla target
 \subsection{Local Learning}
 There are approaches that train neuronal networks using Local Layer error signals\footnote{Nokland, Training Neural Networks with Local Error Signals, 2019} \footnote{Mostafa, "Deep Supervised Learning Using Local Errors", 2018}. This has the advantages, that activations don't occupy space in memory, and that parallelization becomes easy (each layer in own GPU, train all simultaneously). One can use a combination of Similarity Matching Loss (sim) and Cross Entropy Loss (pred).
 
-\subsection{Questions}
-\begin{enumerate}
-    \item How could biological neurons differ between FF and BP error signals?
-    \item How do biological neurons change their incoming weights (synaptic connections)?
-    \item Do biological neurons follow a purely local update rule?
-    \item What is the depth (hierarchical layers) of biological neuronal networks of the human/primate visual system?
-\end{enumerate}
 
 
 \end{document}
